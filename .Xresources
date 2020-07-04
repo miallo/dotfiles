@@ -1,0 +1,51 @@
+xterm*utf8: 1
+
+!fonts&stuff
+xterm*faceSize: 11
+xterm*eightBitInput: false
+xterm*faceName: Bitstream Vera Serif Mono
+!Background & foreground
+xterm*background: #002B36
+xterm*foreground: #D2D2D2
+xterm*borderColor: #343434
+
+!Turning off scrollbar
+xterm*scrollBar:  off
+
+!Starting up with a geometry
+xterm*vt100*geometry:   88x24
+
+!Colors
+!-------------------------
+!black
+xterm*color0: #222222
+xterm*color8: #454545
+
+!red
+xterm*color1: #9E5641
+xterm*color9: #CC896D
+
+!green
+xterm*color2: #6C7E55
+xterm*color10: #C4DF90
+
+!yellow
+xterm*color3: #CAAF2B
+xterm*color11: #FFE080
+
+!blue
+xterm*color4: #7FB8D8
+xterm*color12: #B8DDEA
+
+!magenta
+xterm*color5: #956D9D
+xterm*color13: #C18FCB
+
+!cyan
+xterm*color6: #4c8ea1
+xterm*color14: #6bc1d0
+
+!white
+xterm*color7: #808080
+xterm*color15: #cdcdcd
+
