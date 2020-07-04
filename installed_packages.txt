@@ -25,6 +25,7 @@ man-db
 nodejs
 numlockx
 openssl
+pass
 python2
 python3
 python3-pip
