@@ -5,7 +5,7 @@
 { config, pkgs, ... }:
 
 {
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.allowUnfree = true; # for AndroidStudio
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -15,6 +15,7 @@
       ./custom_scripts.nix
       # ZSH-init
       #./zsh_config.nix
+      ./vim.nix
       ./suspend_on_low_battery.nix
     ];
 
@@ -26,6 +27,9 @@
   # networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true;
+  systemd.services."ModemManager" = {
+    enable = true;
+  };
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -52,65 +56,73 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     wget
-    #UI Stuff, backlight control
+    # UI Stuff, backlight control
     xorg.xev #actkdb #xorg.xbacklight
     xorg.xkill xorg.xorgserver xorg.xf86inputevdev xorg.xf86inputsynaptics xorg.xf86inputlibinput
     lxappearance arandr
     brightnessctl
     dmidecode
-    #xorg.xf86video*******************************
-    #Notifications
+    upower lm_sensors
+    # xorg.xf86video*******************************
+    # Notifications
     libnotify notify-osd #dunst 
-    #Screensaver
+    # Screensaver
     xautolock
-    #Editors
-    vim emacs
-    #Disk usage
+    # Disk usage
     ncdu gparted
-    #zip
+    # zip
     zip unzip
-    #Basic shell stuff
-    curl zsh oh-my-zsh htop man_db tmux screen tree wget which xclip psmisc fd
-    #Networking
-    nmap nmap_graphical wirelesstools
+    # Basic shell stuff
+    curl zsh oh-my-zsh htop man_db tmux screen tree wget which xclip psmisc fd file
+    usbutils pciutils envsubst
+    # Networking
+    nmap wirelesstools openssl
+    libqmi dhcpcd
+    modem-manager-gui #modemmanager
  
-    #FileExplorer
-    pcmanfm #nautilus
-    #Browser
+    # FileExplorer
+    pcmanfm vifm #nautilus
+    # Browser
     firefox chromium
-    #Mail
+    # Mail
     thunderbird
-    #Messenger
+    # Messenger
     signal-desktop mattermost-desktop
-    #Document viewers
+    # Document viewers
     evince gnome3.eog
-    #Image editing
+    # Image editing
     gimp inkscape imagemagick
-    #Videos
+    # Videos
     vlc ffmpeg
-    #Sound
+    # Sound
     pavucontrol
-    #Documents
+    # Documents
     libreoffice
-    #LaTeX
-    #(texlive.combine { inherit (texlive) scheme-medium changepage makecell subfigure graphbox adjustbox collectbox braket bbm fonts-extra; })
+    # LaTeX
     texlive.combined.scheme-full
-    #OCR
+    # OCR
     tesseract
 
-    ###Programming
+    # ##Programming
     gitAndTools.gitFull
-    #JVM
+    ctags
+    # JVM
     openjdk11 scala leiningen maven
     android-studio
-    #JS
+    # JS
     nodejs nodePackages.node2nix #nodePackages.expo-cli nodePackages.react-native-cli
-    #Python
+    # Python
     python3
-    #python3Packages.pip python3Packages.notebook #python3Packages.pygments python3Packages.matplotlib python3Packages.numpy python3Packages.scipy
+    #python3Packages.notebook #python3Packages.pygments python3Packages.matplotlib python3Packages.numpy python3Packages.scipy
+
+    # Editors
+    emacs atom
+
+
+    # Others
+    yad
   ];
   
-
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions
@@ -121,14 +133,16 @@
   #   pinentryFlavor = "gnome3";
   # };
 
-  #Control Backlight
+  # Control Backlight
   programs.light.enable = true;
+
+  programs.adb.enable = true;
 
   # List services that you want to enable:
   # USB Automounting
   services.gvfs.enable = true;  
 
-  #Fingerprint Reader
+  # Fingerprint Reader
   #services.fprintd.enable = true;
   #security.pam.services = {
   #  login.fprintAuth = true;
@@ -149,31 +163,23 @@
 
   # Enable sound.
   sound.enable = true;
+  hardware.opengl.driSupport32Bit = true;
+  hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
   hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.support32Bit = true;
   hardware.bluetooth = {
     enable = true;
     config.General.ControllerMode = "bredr"; #"dual";
   };
 
   environment.pathsToLink = [ "/libexec" ];
+
   services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
     autorun = true;
-    #desktopManager = {
-    #  plasma5.enable = true;
-    #  xterm.enable = false;
-    #};
     layout = "de";
     #videoDrivers = [ "amdgpu" "radeon" ]; # "modesetting" ]; #amdgpu-pro
-    #desktopManager = {
-    #  xterm.enable = true;
-    #};
-    #displayManager = {
-    #  startx.enable = true;
-    #  #defaultSession = "none+i3";
-    #};
-    #desktopManager.lightdm.enable = true;
     windowManager.i3 = {
       enable = true;
       package = pkgs.i3-gaps;
@@ -185,12 +191,10 @@
       ];
     };
     displayManager.lightdm.enable = true;
-    #displayManager.lightdm.autoLogin = {
-    #  enable = true;
-    #  user = "michael";
-    #};
+    #displayManager.lightdm.extraConfig = ''
+    #  greeter-hide-users=false
+    #'';
     desktopManager.xterm.enable = false;
-    #displayManager.defaultSession = "none+i3";
     xkbOptions = "eurosign:e";
   
     # Enable touchpad support.
@@ -207,16 +211,11 @@
     #desktopManager.plasma5.enable = true;
   };
 
-  services.mattermost = {
-    enable = true;
-    siteUrl = "https://team.bevuta.com";
-  };
-    
 
   location.latitude = 51.0;
   location.longitude = 7.0;
   services.redshift = {
-    enable = false;
+    enable = true;
     temperature.day = 5500;
     temperature.night = 3700;
   };
@@ -231,12 +230,16 @@
   users.users.michael = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "audio" "video" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [
+      "wheel" # Enable ‘sudo’ for the user.
+      "plugdev" "adbusers" # Android programming
+      "audio" "video" "networkmanager"
+    ];
   };
   users.users.private = {
     isNormalUser = true;
     shell = pkgs.zsh;
-    extraGroups = [ "wheel" "audio" "video" "networkmanager" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" "plugdev" "audio" "video" "networkmanager" ]; # Enable ‘sudo’ for the user.
   };
 
   # This value determines the NixOS release from which the default
