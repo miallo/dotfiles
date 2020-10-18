@@ -1,0 +1,292 @@
+set $mod Mod1
+
+set $editor vim
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:System San Francisco Display 11
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+# Before i3 v4.8, we used to recommend this one as the default:
+# font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+# The font above is very space-efficient, that is, it looks good, sharp and
+# clear in small sizes. However, its unicode glyph coverage is limited, the old
+# X core fonts rendering does not support right-to-left and this being a bitmap
+# font, it doesn’t scale on retina/hidpi displays.
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+# bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec xterm -fa 'Monospace' -fs 10
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec rofi -show run -theme solarized_alternate #dmenu_run
+bindsym $super+Shift+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=8'"
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+c split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+#bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# Moving workspaces between screens 
+bindsym $mod+p move workspace to output right
+
+
+workspace_auto_back_and_forth yes
+# no autorepeat after 1s for "w"-key
+exec xset -r 25
+bindsym --release $mod+w workspace back_and_forth
+bindsym $mod+w workspace back_and_forth
+bindsym $mod+Shift+w workspace back_and_forth
+
+# Icons in font see https://fontawesome.com/cheatsheet/free/regular
+# In `bar {}` it is the FontAwesome* fonts
+set $WORK1 "1: Internet"
+set $WORK2 "2: >_"
+set $WORK3 "3"
+#set $WORK4 "4: Nautilus"
+set $WORK4 "4: FM"
+set $WORK5 "5"
+set $WORK6 "6"
+set $WORK7 "7"
+set $WORK8 "8"
+set $WORK9 "9: E-Mail"
+set $WORK10 "10: Messenger"
+
+# switch to workspace
+bindsym $mod+1 workspace $WORK1
+bindsym $mod+2 workspace $WORK2
+bindsym $mod+3 workspace $WORK3
+bindsym $mod+4 workspace $WORK4
+bindsym $mod+5 workspace $WORK5
+bindsym $mod+6 workspace $WORK6
+bindsym $mod+7 workspace $WORK7
+bindsym $mod+8 workspace $WORK8
+bindsym $mod+9 workspace $WORK9
+bindsym $mod+0 workspace $WORK10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $WORK1
+bindsym $mod+Shift+2 move container to workspace $WORK2
+bindsym $mod+Shift+3 move container to workspace $WORK3
+bindsym $mod+Shift+4 move container to workspace $WORK4
+bindsym $mod+Shift+5 move container to workspace $WORK5
+bindsym $mod+Shift+6 move container to workspace $WORK6
+bindsym $mod+Shift+7 move container to workspace $WORK7
+bindsym $mod+Shift+8 move container to workspace $WORK8
+bindsym $mod+Shift+9 move container to workspace $WORK9
+bindsym $mod+Shift+0 move container to workspace $WORK10
+
+assign [class="^Firefox$"] $WORK1
+assign [class="^Chromium-browser$"] $WORK1
+assign [class="^Nautilus$"] $WORK4
+assign [class="^Pcmanfm$"] $WORK4
+assign [class="^Daily"] $WORK9
+assign [class="^Signal$"] $WORK10
+assign [class="^Mattermost$"] $WORK10
+for_window [class="Yad"] floating enable
+
+
+# reload the configuration file
+bindsym $mod+Shift+c exec "cat .config/i3/colors .config/i3/base > .config/i3/config && i3-msg reload"
+
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+
+
+set $Locker i3lock && sleep 1
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec ~/.i3/screensaver.sh, mode "default"
+    bindsym e exec ~/.i3/exit_menu.sh, mode "default"
+    #bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+End mode "$mode_system"
+# exit i3 (logs you out of your X session)
+# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec ~/.i3/exit_menu.sh
+bindsym $mod+Shift+End exec ~/.i3/shutdown_menu.sh
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 10 px or 10 ppt
+        bindsym j resize grow height 10 px or 10 ppt
+        bindsym k resize shrink height 10 px or 10 ppt
+        bindsym l resize grow width 10 px or 10 ppt
+        bindsym $mod+h resize shrink width 10 px or 10 ppt
+        bindsym $mod+j resize grow height 10 px or 10 ppt
+        bindsym $mod+k resize shrink height 10 px or 10 ppt
+        bindsym $mod+l resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+exec_always --no-startup-id numlockx on
+
+# Automatischer Bildschirmschoner
+exec xautolock -lockaftersleep -detectsleep -time 30 -locker '$HOME/.i3/screensaver.sh' -notify 20 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" &
+
+# default programs
+exec --no-startup-id xdg-mime default org.gnome.Evince.desktop document/pdf
+exec --no-startup-id xdg-mime default eog.desktop image/jpeg
+
+# Raender entfernen
+hide_edge_borders both
+
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+# Basic bar configuration using the Base16 variables.
+bar {
+    status_command exec "$HOME/.i3/i3status_withNetspeed.sh"
+
+    colors {
+        background $base00
+        separator  $base01
+        statusline $base04
+
+        # State             Border  BG      Text
+        focused_workspace   $base05 $base0D $base00
+        active_workspace    $base05 $base03 $base00
+        inactive_workspace  $base03 $base01 $base05
+        urgent_workspace    $base08 $base08 $base00
+        binding_mode        $base00 $base0A $base00
+    }
+    font pango: System San Francisco Display, DejaVu Sans Mono, FontAwesom5Free, FontAwesome5Brands, FontAwesome5Solid 8
+}
+
+# Basic color configuration using the Base16 variables for windows and borders.
+# Property Name         Border  BG      Text    Indicator Child Border
+client.focused          $base05 $base0D $base00 $base0D $base0C
+client.focused_inactive $base01 $base01 $base05 $base03 $base01
+client.unfocused        $base01 $base00 $base05 $base01 $base01
+client.urgent           $base08 $base08 $base00 $base08 $base08
+client.placeholder      $base00 $base00 $base05 $base00 $base00
+client.background       $base07
+#bar {
+#        #status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
+#        #status_command i3status
+#        status_command exec "$HOME/.i3/i3status_withNetspeed.sh"
+#        colors {
+#            background $bg-color
+#            separator #757575
+#            #                  border             background         text
+#            focused_workspace  $bg-color          $bg-color          $text-color
+#            inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+#            urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+#        }
+#        font pango: System San Francisco Display, DejaVu Sans Mono, FontAwesom5Free, FontAwesome5Brands, FontAwesome5Solid 8
+#}
+
+# Audio level
+#bindsym $mod+Prior exec amixer -q set Master 5%+ unmute
+#bindsym $mod+Next exec  amixer -q set Master 5%- unmute
+#bindsym $mod+End exec amixer -D pulse set Master toggle
+# Pulse Audio controls
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q set Master 5%+ unmute #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q set Master 5%- unmute #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle #pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioMicMute exec --no-startup-id amixer set Capture toggle #toggle microphone active
+
+# Sreen brightness controls
+bindsym XF86MonBrightnessUp exec light -A 15 # increase screen brightness
+bindsym XF86MonBrightnessDown exec light -U 15 # decrease screen brightness
+
+# Toggle wifi
+bindsym XF86WLAN exec "$HOME/.i3/togglewifi.sh"
+
+
+
+
+# exec if xrandr | grep -q 'HDMI1 connected'; then xrandr --output HDMI1 --primary --auto --right-of DP2; else xrandr --output HDMI2 --primary --auto --right-of DP1; fi
+#exec --no-startup-id i3-msg 'workspace $WORK4; exec nautilus'
+#exec --no-startup-id i3-msg 'workspace $WORK10; exec signal-desktop; exec mattermost-desktop'
+#exec --no-startup-id i3-msg 'workspace $WORK9; exec thunderbird'
+exec --no-startup-id i3-msg 'workspace $WORK4; exec pcmanfm'
+exec --no-startup-id i3-msg 'workspace $WORK1; exec chromium;'
+#exec --no-startup-id i3-msg 'workspace $WORK1; exec firefox;'
+exec --no-startup-id i3-msg 'workspace $WORK2; exec xterm'
+

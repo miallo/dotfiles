@@ -15,8 +15,9 @@ syntax on
 " 'plaintex' instead of 'tex', which results in vim-latex not being loaded.
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
-let g:Tex_ViewRule_pdf='open -a Preview.app'
-let g:Tex_TreatMacViewerAsUNIX=0
+"let g:Tex_ViewRule_pdf='open -a Preview.app'
+let g:Tex_ViewRule_pdf='evince'
+"let g:Tex_TreatMacViewerAsUNIX=0
 let g:Tex_Env_enumerate="\\begin{enumerate}\<CR>\\item \<CR>\\end{enumerate}\<CR><++>"
 let g:Tex_Env_figure="\\begin{figure}[htb]\<CR>\\centering\<CR>\\includegraphics[width=<++>\\linewidth]{<++>}\<CR>\\caption{<++>}\<CR>\\label{fig:<++>}\<CR>\\end{figure}\<CR><++>"
 let g:Tex_Env_frame="\\begin{frame}\<CR>\\frametitle{<++>}\<CR>\\framesubtitle{<++>}\<CR><++>\<CR>\\end{frame}\<CR><++>"
@@ -35,6 +36,6 @@ let g:Tex_FoldedMisc="preamble,<<<"
 let g:Tex_CompileRule_pdf='pdflatex -interaction=nonstopmode -synctex=1 --src-specials -shell-escape $*'
 let g:Tex_GotoError=0
 
-let g:Tex_IgnoredWarnings.="\n"."has changed"."\n"."Unused global option(s): [pagesize]"."\n"."There were undefined citations"
-let g:Tex_IgnoreLevel+=3
+"let g:Tex_IgnoredWarnings.="\n"."has changed"."\n"."Unused global option(s): [pagesize]"."\n"."There were undefined citations"
+"let g:Tex_IgnoreLevel+=3
 
