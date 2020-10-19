@@ -154,8 +154,8 @@ bindsym $mod+Shift+r restart
 set $Locker i3lock && sleep 1
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec ~/.i3/screensaver.sh, mode "default"
-    bindsym e exec ~/.i3/exit_menu.sh, mode "default"
+    bindsym l exec ~/.config/i3/screensaver.sh, mode "default"
+    bindsym e exec ~/.config/i3/exit_menu.sh, mode "default"
     #bindsym e exec --no-startup-id i3-msg exit, mode "default"
     bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
     bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
@@ -169,8 +169,8 @@ mode "$mode_system" {
 bindsym $mod+End mode "$mode_system"
 # exit i3 (logs you out of your X session)
 # bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
-bindsym $mod+Shift+e exec ~/.i3/exit_menu.sh
-bindsym $mod+Shift+End exec ~/.i3/shutdown_menu.sh
+bindsym $mod+Shift+e exec ~/.config/i3/exit_menu.sh
+bindsym $mod+Shift+End exec ~/.config/i3/shutdown_menu.sh
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -219,7 +219,7 @@ hide_edge_borders both
 # finds out, if available)
 # Basic bar configuration using the Base16 variables.
 bar {
-    status_command exec "$HOME/.i3/i3status_withNetspeed.sh"
+    status_command exec "$HOME/.config/i3/i3status_withNetspeed.sh"
 
     colors {
         background $base00
@@ -283,8 +283,8 @@ bindsym XF86WLAN exec "$HOME/.i3/togglewifi.sh"
 
 # exec if xrandr | grep -q 'HDMI1 connected'; then xrandr --output HDMI1 --primary --auto --right-of DP2; else xrandr --output HDMI2 --primary --auto --right-of DP1; fi
 #exec --no-startup-id i3-msg 'workspace $WORK4; exec nautilus'
-#exec --no-startup-id i3-msg 'workspace $WORK10; exec signal-desktop; exec mattermost-desktop'
-#exec --no-startup-id i3-msg 'workspace $WORK9; exec thunderbird'
+exec --no-startup-id i3-msg 'workspace $WORK10; exec signal-desktop; exec mattermost-desktop'
+exec --no-startup-id i3-msg 'workspace $WORK9; exec thunderbird'
 exec --no-startup-id i3-msg 'workspace $WORK4; exec pcmanfm'
 exec --no-startup-id i3-msg 'workspace $WORK1; exec chromium;'
 #exec --no-startup-id i3-msg 'workspace $WORK1; exec firefox;'

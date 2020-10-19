@@ -7,3 +7,6 @@
 [submodule ".vim/bundle/Vundle.vim"]
 	path = .vim/bundle/Vundle.vim
 	url = https://github.com/VundleVim/Vundle.vim
+[submodule ".config/i3/base16-i3"]
+	path = .config/i3/base16-i3
+	url = https://github.com/khamer/base16-i3
