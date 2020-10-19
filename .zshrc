@@ -1,8 +1,9 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+ZSH_DISABLE_COMPFIX=true
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/Michael/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -28,6 +29,7 @@ ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
+DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
@@ -60,7 +62,7 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 # globalias
 plugins=(
-  shrink-path zsh-autosuggestions git python zsh-syntax-highlighting
+  shrink-path zsh-autosuggestions git python node zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -138,22 +140,16 @@ setopt prompt_subst
 #PS1='%n $(shrink_path -f) $(git_super_status)> '
 PS1='$(shrink_path -f) $(git_custom_status)> '
 
-#export PATH="/Users/Michael/anaconda2/bin:$PATH"
-
-
-
-
-
 
 # cd does not automatically push to pushd/popd/dirs stack
 unsetopt autopushd
 function cdl () { cd $@; ls }
 function cdla () { cd $@; la }
-export PATH="/usr/local/sbin:$PATH"
 
 
+typeset -A __WINCENT
+
+source $HOME/.config/zsh/colors
 
 zstyle ':completion:*:*:vim:*' file-patterns '^*(.(png|aux|log|pdf|bbl|blg|out|toc|run.xml|synctex.gz)|-blx.bib):source-files' '*:all-files'
 zstyle ':completion:*:*:nvim:*' file-patterns '^*(.(png|aux|log|pdf|bbl|blg|out|toc|run.xml|synctex.gz)|-blx.bib):source-files' '*:all-files'
-
-export PATH="/usr/local/opt/python@3.8/bin:$PATH"

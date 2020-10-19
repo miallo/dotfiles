@@ -44,8 +44,8 @@ color() {
   emulate -L zsh
 
   local SCHEME="$1"
-  local BASE16_DIR=~/.zsh/base16-shell/scripts
-  local I3BASE_DIR=~/.i3
+  local BASE16_DIR=~/.config/zsh/base16-shell/scripts
+  local I3BASE_DIR=~/.config/i3
   local BASE16_I3_DIR="$I3BASE_DIR/base16-i3/colors"
   local BASE16_CONFIG_PREVIOUS="${__WINCENT[BASE16_CONFIG]}.previous"
   local STATUS=0
