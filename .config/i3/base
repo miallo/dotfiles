@@ -22,8 +22,8 @@ font pango:System San Francisco Display 11
 floating_modifier $mod
 
 # start a terminal
-# bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec xterm -fa 'Monospace' -fs 10
+bindsym $mod+Return exec i3-sensible-terminal
+# bindsym $mod+Return exec xterm -fa 'Monospace' -fs 10
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -143,7 +143,12 @@ assign [class="^Daily"] $WORK9
 assign [class="^Signal$"] $WORK10
 assign [class="^Mattermost$"] $WORK10
 for_window [class="Yad"] floating enable
+for_window [title="^Android Emulator*"] floating enable
 
+# go to last window
+bindsym $mod+comma [con_mark=_prevFocus0] focus
+bindsym $mod+ctrl+comma [con_mark=_prevFocus2] focus
+exec --no-startup-id ~/.config/i3/lastWindow.sh
 
 # reload the configuration file
 bindsym $mod+Shift+c exec "cat .config/i3/colors .config/i3/base > .config/i3/config && i3-msg reload"
@@ -220,6 +225,9 @@ hide_edge_borders both
 # finds out, if available)
 # Basic bar configuration using the Base16 variables.
 bar {
+    wheel_up_cmd nop
+    wheel_down_cmd nop
+
     status_command exec "$HOME/.config/i3/i3status_withNetspeed.sh"
 
     colors {
