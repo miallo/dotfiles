@@ -1,3 +1,4 @@
+# i3 config file (v4)
 set $mod Mod1
 
 set $editor vim
@@ -205,7 +206,7 @@ bindsym $mod+r mode "resize"
 exec_always --no-startup-id numlockx on
 
 # Automatischer Bildschirmschoner
-exec xautolock -lockaftersleep -detectsleep -time 30 -locker '$HOME/.i3/screensaver.sh' -notify 20 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" &
+exec xautolock -lockaftersleep -detectsleep -time 30 -locker '$HOME/.config/i3/screensaver.sh' -notify 20 -notifier "notify-send -u critical -t 10000 -- 'LOCKING screen in 30 seconds'" &
 
 # default programs
 exec --no-startup-id xdg-mime default org.gnome.Evince.desktop document/pdf
@@ -247,7 +248,7 @@ client.background       $base07
 #bar {
 #        #status_command i3blocks -c $HOME/.config/i3/i3blocks.conf
 #        #status_command i3status
-#        status_command exec "$HOME/.i3/i3status_withNetspeed.sh"
+#        status_command exec "$HOME/.config/i3/i3status_withNetspeed.sh"
 #        colors {
 #            background $bg-color
 #            separator #757575
@@ -276,17 +277,22 @@ bindsym XF86MonBrightnessUp exec light -A 15 # increase screen brightness
 bindsym XF86MonBrightnessDown exec light -U 15 # decrease screen brightness
 
 # Toggle wifi
-bindsym XF86WLAN exec "$HOME/.i3/togglewifi.sh"
+bindsym XF86WLAN exec "$HOME/.config/i3/togglewifi.sh"
 
 
 
 
 # exec if xrandr | grep -q 'HDMI1 connected'; then xrandr --output HDMI1 --primary --auto --right-of DP2; else xrandr --output HDMI2 --primary --auto --right-of DP1; fi
-#exec --no-startup-id i3-msg 'workspace $WORK4; exec nautilus'
-exec --no-startup-id i3-msg 'workspace $WORK10; exec signal-desktop; exec mattermost-desktop'
-exec --no-startup-id i3-msg 'workspace $WORK9; exec thunderbird'
-exec --no-startup-id i3-msg 'workspace $WORK4; exec pcmanfm'
-exec --no-startup-id i3-msg 'workspace $WORK1; exec chromium;'
-#exec --no-startup-id i3-msg 'workspace $WORK1; exec firefox;'
-exec --no-startup-id i3-msg 'workspace $WORK2; exec xterm'
+#exec --no-startup-id i3-msg "workspace $WORK4; exec nautilus"
+#exec --no-startup-id i3-msg "workspace $WORK10; exec signal-desktop; exec mattermost-desktop"
+#exec --no-startup-id i3-msg "workspace $WORK9; exec thunderbird"
+exec --no-startup-id i3-msg "workspace $WORK4; exec pcmanfm"
+exec --no-startup-id i3-msg "workspace $WORK1; exec chromium;"
+#exec --no-startup-id i3-msg "workspace $WORK1; exec firefox;"
+exec --no-startup-id i3-msg "workspace $WORK2; exec xterm"
 
+# Marks like vim
+# read 1 character and mark the current window with this character
+bindsym $mod+m exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+# read 1 character and go to the window with the character
+bindsym $mod+g exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '

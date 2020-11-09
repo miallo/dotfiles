@@ -7,7 +7,6 @@ if [ $status = "enabled" ] ; then
 else
     notify-send -i network-wireless-none "wireless enabled"
     nmcli radio wifi on
-
 fi
 
 exit 0
