@@ -4,4 +4,3 @@
 
 `cp Xdefaults ~/.Xdefaults && xrdb ~/.Xdefaults`
 
-
