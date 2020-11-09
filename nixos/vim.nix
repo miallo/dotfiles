@@ -2,25 +2,36 @@
 
 let
   vim-latex = pkgs.vimUtils.buildVimPlugin {
-    name = "vim-latex";
+    pname = "vim-latex";
+    version = "2020-07-30";
     src = pkgs.fetchFromGitHub {
       owner = "vim-latex";
       repo = "vim-latex";
       rev = "d97bbf333453b793ab0916265c900299934723e2";
       sha256 = "1hzcsfq2zb091v4yy1jr10pi1yc3max1jlj8k5rr0gxvsy0rxzkw";
     };
+    meta = {
+      description = "This vim plugin provides a rich tool of features for editing latex files";
+      license = pkgs.lib.licenses.cc0;
+    };
   };
   vim-jsx-pretty = pkgs.vimUtils.buildVimPlugin {
-    name = "vim-jsx-pretty";
+    pname = "vim-jsx-pretty";
+    version = "2020-11-07";
     src = pkgs.fetchFromGitHub {
       owner = "maxmellon";
       repo = "vim-jsx-pretty";
-      rev = "3a24dca8f8cc9b88efca3faf446db41f5b7da121";
-      sha256 = "0gn9rlwndq0awv51gxvd3gsxlh5sb76cvc60bh0lsh4f4lhmyy3r";
+      rev = "8059c9269ab62ffc4ccca587e2a2a894806fa5e6";
+      sha256 = "04jmmyz79mrq7mpl9kqrc8v28gn50jl93lzkyyhzp7dyhixgbgkm";
+    };
+    meta = {
+      description = "The React syntax highlighting and indenting plugin for vim";
+      license = pkgs.lib.licenses.mit;
     };
   };
   loupe = pkgs.vimUtils.buildVimPlugin {
-    name = "loupe";
+    pname = "loupe";
+    version = "2020-10-12";
     src = pkgs.fetchFromGitHub {
       owner = "wincent";
       repo = "loupe";
@@ -29,10 +40,12 @@ let
     };
     meta = {
       description = "Make search/regex work bit more sensible";
+      license = pkgs.lib.licenses.bsd2;
     };
   };
   terminus = pkgs.vimUtils.buildVimPlugin {
-    name = "terminus";
+    pname = "terminus";
+    version = "2020-10-04";
     src = pkgs.fetchFromGitHub {
       owner = "wincent";
       repo = "terminus";
@@ -41,11 +54,12 @@ let
     };
     meta = {
       description = "Improve Terminal support: Cursor-Shape in insert, mouse support, focus reporting, bracketed paste";
+      license = pkgs.lib.licenses.bsd2;
     };
   };
 
 in {
-  environment.variables = { EDITOR = "vim"; };
+  environment.variables = { EDITOR = "nvim"; };
 
   environment.systemPackages = with pkgs; [
     (neovim.override {
@@ -56,10 +70,12 @@ in {
       configure = {
         packages.myPlugins = with pkgs.vimPlugins; {
           start = [
-            vim-lastplace
-            vim-nix
+            vim-lastplace   # Open file at last known cursor position
+            vim-nix         # Nix-syntax highlighting
             vim-fugitive    # Git wrapper
-            fzf
+            vim-eunuch      # Rename/move files
+            vim-surround    # Change surrounding paranths/quotes with :cs"'
+            fzf             # fuzzy file finder
             loupe           # Search magically
             terminus        # Make terminal vim behave a bit more graphical
             #YouCompleteMe
@@ -69,26 +85,31 @@ in {
             vim-javascript
             #vim-js-file-import
             vim-jsx-pretty
+            indentLine      # Show indentation levels
             ale             # Linting
             base16-vim      # Colors
-            nerdtree        # Filefinder
+            #nerdtree        # Filefinder
             #vim-gutentags
-            vim-fireplace   # Clojure
-            vim-commentary
+            #vim-fireplace   # Clojure
+            vim-commentary  # Comment/uncomment with gcc
+            vimwiki         # Have markdown-wiki at ~/.vimwiki
           ];
           opt = [];
         };
         customRC = ''
-          " your custom vimrc
+          let g:ale_completion_enabled = 1
+          let g:ale_completion_autoimport = 1
+
+          set title
           " VIM searches throu all sub-directories recursively for filenames
           set path+=**
           " Nice menu when typing `:find *.py`
           set wildmenu
           
           syntax on
-          if has('syntax')
-            set synmaxcol=200                   " don't bother syntax highlighting long lines
-          endif
+          " if has('syntax')
+          "   set synmaxcol=200                   " don't bother syntax highlighting long lines
+          " endif
           filetype plugin indent on
           
           " IMPORTANT: win32 users will need to have 'shellslash' set so that latex
@@ -100,16 +121,13 @@ in {
           " program to always generate a file-name.
           set grepprg=grep\ -nH\ $*
           
-          " OPTIONAL: This enables automatic indentation as you type.
-          filetype indent on
-          
           set bs=indent,eol,start               " allow backspacing over everything in insert mode
           set ai                                " always set autoindenting on
           if exists('$SUDO_USER')
             set nobackup                        " don't create root-owned files
             set nowritebackup                   " don't create root-owned files
           else
-            set backupdir=~/.vim/tmp/backup     " keep backup files out of the way
+            set backupdir=~/.vim/tmp/backup//   " keep backup files out of the way
             set backupdir+=.
           endif
           if exists('$SUDO_USER')
@@ -122,7 +140,7 @@ in {
             if exists('$SUDO_USER')
               set noundofile                    " don't create root-owned files
             else
-              set undodir=~/.vim/tmp/undo       " keep undo files out of the way
+              set undodir=~/.vim/tmp/undo//     " keep undo files out of the way
               set undodir+=.
               set undofile                      " actually use undo files
             endif
@@ -135,7 +153,7 @@ in {
           set history=50                        " keep 50 lines of command line history
           set ruler                             " show the cursor position all the time
           if has('mksession')
-            set viewdir=~/.vim/tmp/view         " override ~/.vim/view default
+            set viewdir=~/.vim/tmp/view//       " override ~/.vim/view default
             set viewoptions=cursor,folds        " save/restore just these (with `:{mk,load}view`)
           endif
           set hlsearch
@@ -191,6 +209,18 @@ in {
             autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
             autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
           augroup END
+          let FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden'
+          " Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
+          command! -bang -nargs=* Rg
+            \ call fzf#vim#grep(
+            \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+            \   <bang>0 ? fzf#vim#with_preview('up:60%')
+            \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+            \   <bang>0)
+
+          command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+          command! -bang -nargs=? -complete=dir Files
+              \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '${pkgs.vimPlugins.fzf-vim}/bin/preview.sh {}']}, <bang>0)
           
           "k auf visual k
           nnoremap <Up> gk
@@ -270,18 +300,63 @@ in {
           set wildignore+=*.pyc
           set wildignore+=*_build/*
           set wildignore+=*/coverage/*
+          set wildignore+=*/node_modules/*
           
           " Python folding
           " mkdir -p ~/.vim/ftplugin
           " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
           " set nofoldenable
           
+          let g:vimwiki_list = [
+            \{
+            \ 'auto_export': 1,
+            \ 'auto_header' : 1,
+            \ 'automatic_nested_syntaxes':1,
+            \ 'path_html': '/home/michael/wiki/html',
+            \ 'path': '/home/michael/wiki/src',
+            \ 'template_path': '/home/michael/wiki/templates/',
+            \ 'template_default':'GitHub',
+            \ 'template_ext':'.html5',
+            \ 'syntax': 'markdown',
+            \ 'ext':'.md',
+            \ 'custom_wiki2html': '/home/michael/.vim/scripts/wiki2html.sh',
+            \ 'auto_tags': 1,
+            \ 'list_margin': 0,
+            \ 'links_space_char' : '_',
+            \},
+            \{
+            \ 'auto_export': 1,
+            \ 'auto_header' : 1,
+            \ 'automatic_nested_syntaxes':1,
+            \ 'path_html': '$HOME/personalwiki/html',
+            \ 'path': '$HOME/personalwiki/src',
+            \ 'template_path': '$HOME/personalwiki/templates/',
+            \ 'template_default':'GitHub',
+            \ 'template_ext':'.html5',
+            \ 'syntax': 'markdown',
+            \ 'ext':'.md',
+            \ 'custom_wiki2html': '$HOME/.vim/scripts/wiki2html.sh',
+            \ 'auto_tags': 1,
+            \ 'list_margin': 0,
+            \ 'links_space_char' : '_',
+            \}
+            \]
+          " let g:vimwiki_folding='expr'
+          let g:vimwiki_hl_headers = 1
+          " let g:vimwiki_ext2syntax = {'.md': 'markdown'}
+          "augroup vimwiki
+          "  au!
+          "  au FileType vimwiki nnoremap  <Leader>wl <Plug>VimwikiVSplitLink
+          "augroup END
+
+          let g:indentLine_fileTypeExclude=['tex', 'help']
+          let g:indentLine_bufNameExclude=['NERD_tree.*']
           
-          " let g:ycm_autoclose_preview_window_after_completion=1
-          let g:ycm_extra_conf_globlist = ['~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py']
-          "set omnifunc=syntaxcomplete#Complete
-          let g:ycm_path_to_python_interpreter = 'python'
-          let g:ycm_python_binary_path = 'python3'
+          "" let g:ycm_autoclose_preview_window_after_completion=1
+          "let g:ycm_extra_conf_globlist = ['~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py']
+          ""set omnifunc=syntaxcomplete#Complete
+          "let g:ycm_path_to_python_interpreter = 'python'
+          "let g:ycm_python_binary_path = 'python3'
           
           let g:WincentColorColumnBlacklist = ['diff', 'undotree', 'nerdtree', 'qf']
 
@@ -296,13 +371,13 @@ in {
            let g:ale_fix_on_save = 1
 
           "vim-js-file-import key bindings
-          nnoremap <Leader>if <Plug>(JsFileImport)
-          nnoremap <Leader>iF <Plug>(JsFileImportList)
-          nnoremap <Leader>ig <Plug>(JsGotoDefinition)
-          nnoremap <Leader>iG <Plug>(JsGotoDefinition)
-          nnoremap <Leader>ip <Plug>(PromptJsFileImport)
-          nnoremap <Leader>is <Plug>(SortJsFileImport)
-          nnoremap <Leader>ic <Plug>(JsFixImport)
+          "nnoremap <Leader>if <Plug>(JsFileImport)
+          "nnoremap <Leader>iF <Plug>(JsFileImportList)
+          "nnoremap <Leader>ig <Plug>(JsGotoDefinition)
+          "nnoremap <Leader>iG <Plug>(JsGotoDefinition)
+          "nnoremap <Leader>ip <Plug>(PromptJsFileImport)
+          "nnoremap <Leader>is <Plug>(SortJsFileImport)
+          "nnoremap <Leader>ic <Plug>(JsFixImport)
           
           
           set list                              " show whitespace

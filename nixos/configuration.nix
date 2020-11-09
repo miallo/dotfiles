@@ -4,7 +4,9 @@
 
 { config, pkgs, ... }:
 
-{
+let
+  stable = import <nixos-stable> { config = config.nixpkgs.config; };
+in {
   nixpkgs.config.allowUnfree = true; # for AndroidStudio
   imports =
     [ # Include the results of the hardware scan.
@@ -52,6 +54,7 @@
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
 
+  nix.gc.automatic = false;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -72,18 +75,27 @@
     ncdu gparted
     # zip
     zip unzip
+    # Terminal emulator
+    # termite
     # Basic shell stuff
     curl zsh oh-my-zsh htop man_db tmux screen tree wget which xclip psmisc fd file
     usbutils pciutils envsubst
+    # Fuzzy file finder
+    fzf
+
+    # correcting mistakes
+    thefuck
     # Networking
     nmap wirelesstools openssl
+    networkmanager_dmenu
     libqmi dhcpcd
     modem-manager-gui #modemmanager
- 
+    bandwhich # which application uses bandwith
+
     # FileExplorer
     pcmanfm vifm #nautilus
     # Browser
-    firefox chromium
+    firefox ungoogled-chromium #chromium #
     # Mail
     thunderbird
     # Messenger
@@ -99,7 +111,7 @@
     # Documents
     libreoffice
     # LaTeX
-    texlive.combined.scheme-full
+    stable.texlive.combined.scheme-full
     # OCR
     tesseract
 
@@ -110,19 +122,26 @@
     openjdk11 scala leiningen maven
     android-studio
     # JS
-    nodejs nodePackages.node2nix #nodePackages.expo-cli nodePackages.react-native-cli
+    nodejs #nodePackages.node2nix #nodePackages.expo-cli nodePackages.react-native-cli
     # Python
     python3
     #python3Packages.notebook #python3Packages.pygments python3Packages.matplotlib python3Packages.numpy python3Packages.scipy
 
+    # vimwiki => html converter
+    pandoc
+
     # Editors
-    emacs atom
+    emacs #atom
 
 
     # Others
     yad
   ];
-  
+
+  system.autoUpgrade = {
+    enable = true;
+    dates = "04:30";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions
@@ -138,9 +157,13 @@
 
   programs.adb.enable = true;
 
+  programs.steam.enable = true;
+
   # List services that you want to enable:
   # USB Automounting
   services.gvfs.enable = true;  
+
+  #services.udev.packages = [ monitor_hotplugging ];
 
   # Fingerprint Reader
   #services.fprintd.enable = true;
@@ -190,12 +213,12 @@
         i3blocks
       ];
     };
+    xkbOptions = "ctrl:swapcaps";
     displayManager.lightdm.enable = true;
     #displayManager.lightdm.extraConfig = ''
     #  greeter-hide-users=false
     #'';
     desktopManager.xterm.enable = false;
-    xkbOptions = "eurosign:e";
   
     # Enable touchpad support.
     libinput = {
@@ -203,7 +226,10 @@
       naturalScrolling = true;
       disableWhileTyping = true;
       middleEmulation = false;
-      tapping = false;
+      tapping = true;
+
+      # lower right corner of trackpad not treated as right click
+      clickMethod = "clickfinger";
     };
   
     # Enable the KDE Desktop Environment.
