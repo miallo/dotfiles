@@ -295,19 +295,18 @@ bindsym XF86WLAN exec "$HOME/.config/i3/togglewifi.sh"
 
 # exec if xrandr | grep -q 'HDMI1 connected'; then xrandr --output HDMI1 --primary --auto --right-of DP2; else xrandr --output HDMI2 --primary --auto --right-of DP1; fi
 #exec --no-startup-id i3-msg "workspace $WORK4; exec nautilus"
-#exec --no-startup-id i3-msg "workspace $WORK10; exec signal-desktop; exec mattermost-desktop"
-#exec --no-startup-id i3-msg "workspace $WORK9; exec thunderbird"
-exec --no-startup-id i3-msg "workspace $WORK4; exec pcmanfm"
 exec --no-startup-id i3-msg "workspace $WORK1; exec chromium;"
 #exec --no-startup-id i3-msg "workspace $WORK1; exec firefox;"
-exec --no-startup-id i3-msg "workspace $WORK2; exec xterm"
+exec --no-startup-id i3-msg "workspace $WORK2; exec i3-sensible-terminal"
+exec --no-startup-id i3-msg "workspace $WORK4; exec pcmanfm"
+exec --no-startup-id i3-msg "workspace $WORK9; exec thunderbird"
+exec --no-startup-id i3-msg "workspace $WORK10; exec signal-desktop; exec mattermost-desktop"
 
 # Marks like vim
 # read 1 character and mark the current window with this character
-bindsym			$mod+m		exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
+bindsym $mod+m			exec i3-input -F 'mark %s' -l 1 -P 'Mark: '
 # read 1 character and go to the window with the character
-bindsym			$mod+g		exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
+bindsym $mod+g			exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 
-￼
-bindsym --release Print		exec import -silent -window root	"$HOME/Pictures/Screenshots/screenshot-$(date --iso-8601='seconds').png"
-bindsym --release Shift+Print	exec import -silent					"$HOME/Pictures/Screenshots/screenshot-$(date --iso-8601='seconds').png"
+bindsym --release Print exec import -silent -window root "$HOME/Pictures/Screenshots/screenshot-$(date --iso-8601='seconds').png"
+bindsym --release Shift+Print exec import -silent "$HOME/Pictures/Screenshots/screenshot-$(date --iso-8601='seconds').png"
