@@ -1,4 +1,3 @@
-# https://xkcd.com/1513/
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
@@ -21,6 +20,11 @@ in {
       ./vim.nix
       ./suspend_on_low_battery.nix
     ];
+
+  nixpkgs.overlays = [
+    ( import ./overlays/i3.nix )
+    # ( import ./overlays/neovim.nix ) # issue with TreeSitter
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -67,9 +71,8 @@ in {
     brightnessctl
     dmidecode
     upower lm_sensors
-    # xorg.xf86video*******************************
     # Notifications
-    libnotify notify-osd #dunst 
+    libnotify notify-osd # dunst
     # Screensaver
     xautolock
     # Disk usage
@@ -77,12 +80,15 @@ in {
     # zip
     zip unzip
     # Terminal emulator
-    # termite
+    alacritty # termite
     # Basic shell stuff
     curl zsh oh-my-zsh htop man_db tmux screen tree wget which xclip psmisc fd file
     usbutils pciutils envsubst
     # Fuzzy file finder
     fzf
+
+    # Neovim
+    # tree-sitter
 
     # correcting mistakes
     thefuck
@@ -94,7 +100,7 @@ in {
     bandwhich # which application uses bandwith
 
     # FileExplorer
-    pcmanfm vifm #nautilus
+    pcmanfm vifm
     # Browser
     firefox ungoogled-chromium #chromium #
     # Mail
@@ -118,12 +124,16 @@ in {
 
     # ##Programming
     gitAndTools.gitFull
+    gitAndTools.tig
     ctags
     # JVM
     openjdk11 scala leiningen maven
     android-studio
+
+    # Syntax highlighted cat
+    glow
     # JS
-    nodejs #nodePackages.node2nix #nodePackages.expo-cli nodePackages.react-native-cli
+    nodejs jq #nodePackages.node2nix #nodePackages.expo-cli nodePackages.react-native-cli
     # Python
     python3
     #python3Packages.notebook #python3Packages.pygments python3Packages.matplotlib python3Packages.numpy python3Packages.scipy
@@ -175,6 +185,7 @@ in {
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+  programs.ssh.startAgent = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];

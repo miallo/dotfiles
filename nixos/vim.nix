@@ -15,20 +15,6 @@ let
       license = pkgs.lib.licenses.cc0;
     };
   };
-  vim-jsx-pretty = pkgs.vimUtils.buildVimPlugin {
-    pname = "vim-jsx-pretty";
-    version = "2020-11-07";
-    src = pkgs.fetchFromGitHub {
-      owner = "maxmellon";
-      repo = "vim-jsx-pretty";
-      rev = "8059c9269ab62ffc4ccca587e2a2a894806fa5e6";
-      sha256 = "04jmmyz79mrq7mpl9kqrc8v28gn50jl93lzkyyhzp7dyhixgbgkm";
-    };
-    meta = {
-      description = "The React syntax highlighting and indenting plugin for vim";
-      license = pkgs.lib.licenses.mit;
-    };
-  };
   loupe = pkgs.vimUtils.buildVimPlugin {
     pname = "loupe";
     version = "2020-10-12";
@@ -73,9 +59,11 @@ in {
             vim-lastplace   # Open file at last known cursor position
             vim-nix         # Nix-syntax highlighting
             vim-fugitive    # Git wrapper
+            gitgutter       # Show which lines changed
+
             vim-eunuch      # Rename/move files
             vim-surround    # Change surrounding paranths/quotes with :cs"'
-            fzf             # fuzzy file finder
+            fzf-vim         # fuzzy file finder
             loupe           # Search magically
             terminus        # Make terminal vim behave a bit more graphical
             #YouCompleteMe
@@ -85,8 +73,11 @@ in {
             vim-javascript
             #vim-js-file-import
             vim-jsx-pretty
+            vim-test        # Run tests from inside vim
+
             indentLine      # Show indentation levels
             ale             # Linting
+            deoplete-nvim   # Code completion
             base16-vim      # Colors
             #nerdtree        # Filefinder
             #vim-gutentags
@@ -97,9 +88,6 @@ in {
           opt = [];
         };
         customRC = ''
-          let g:ale_completion_enabled = 1
-          let g:ale_completion_autoimport = 1
-
           set title
           " VIM searches throu all sub-directories recursively for filenames
           set path+=**
@@ -255,13 +243,51 @@ in {
           set smarttab
           set pastetoggle=<F3>
           
+          "" Deoplete
+          let g:deoplete#enable_at_startup = 1
+          "Add extra filetypes
+          let g:deoplete#sources#ale#filetypes = [
+                \ 'jsx',
+                \ 'javascript.jsx',
+                \ 'vue',
+                \ 'javascript'
+                \ ]
+          let g:deoplete#custom#sources#ale#rank = 999
+          "autocmd VimEnter * call deoplete#custom#source('ale', 'rank', 999)
+          "call deoplete#custom#option('sources', {
+          "  \ '_': ['ale'],
+          "\})
+          " deoplete tab-complete
+          inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+
+          "" ALE
+          if exists("g:deoplete#enable_at_startup")
+            let g:ale_completion_enabled = g:deoplete#enable_at_startup ? 0 : 1
+          else
+            let g:ale_completion_enabled = 1
+          endif
+          let g:ale_completion_autoimport = 1
+          "JS-files fix eslint format on save
+          let g:ale_fixers = {
+           \ 'javascript': ['prettier', 'eslint'],
+           \ 'latex': ['latexindent', 'textlint']
+           \ }
+          let g:ale_fix_on_save = 1
+
+          "" vim-test
+          nmap <silent> t<C-n> :TestNearest<CR>
+          nmap <silent> t<C-f> :TestFile<CR>
+          nmap <silent> t<C-s> :TestSuite<CR>
+          nmap <silent> t<C-l> :TestLast<CR>
+          nmap <silent> t<C-g> :TestVisit<CR>
+
           augroup python
             au!
             au FileType python map <buffer> <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
               autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
               autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
               au FileType python nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-            au FileType python imap <buffer> <c-c> ###################################################################
+              au FileType python imap <buffer> <c-c> #################################################################
               "au FileType python imap <silent> <buffer> . .<C-X><C-O>
           augroup END
           
@@ -280,10 +306,10 @@ in {
               au FileType tex call Tex_MakeMap('<leader>ll', '<ESC>:update!<CR>:call Tex_RunLaTeX()<CR>', 'v', '<buffer>')
           augroup END
           
-          map <c-h> <c-w>h
-          map <c-j> <c-w>j
-          map <c-k> <c-w>k
-          map <c-l> <c-w>l
+          nnoremap <c-h> <c-w>h
+          nnoremap <c-j> <c-w>j
+          nnoremap <c-k> <c-w>k
+          nnoremap <c-l> <c-w>l
           
           "sort lines alphabetically (Leader is \ by default)
           vnoremap <Leader>s :sort<CR>
@@ -362,13 +388,6 @@ in {
 
           "Close vim if NERDtree is only Buffer left
           autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-          "JS-files fix eslint format on save
-          let g:ale_fixers = {
-           \ 'javascript': ['prettier', 'eslint'],
-           \ 'latex': ['latexindent', 'textlint']
-           \ }
-           let g:ale_fix_on_save = 1
 
           "vim-js-file-import key bindings
           "nnoremap <Leader>if <Plug>(JsFileImport)
