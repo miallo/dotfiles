@@ -1,2 +1,5 @@
 .config/i3/config
+.config/i3/colors
+.vim/.base16
+.vim/.base16.previous
 *.vim/tmp
