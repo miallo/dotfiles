@@ -23,7 +23,7 @@ in {
 
   nixpkgs.overlays = [
     ( import ./overlays/i3.nix )
-    # ( import ./overlays/neovim.nix ) # issue with TreeSitter
+    ( import ./overlays/neovim.nix )
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -86,9 +86,6 @@ in {
     usbutils pciutils envsubst
     # Fuzzy file finder
     fzf
-
-    # Neovim
-    # tree-sitter
 
     # correcting mistakes
     thefuck
