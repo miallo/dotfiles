@@ -76,6 +76,7 @@ source ~/.bash_aliases
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
+export EDITOR='nvim'
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
@@ -153,3 +154,7 @@ source $HOME/.config/zsh/colors
 
 zstyle ':completion:*:*:vim:*' file-patterns '^*(.(png|aux|log|pdf|bbl|blg|out|toc|run.xml|synctex.gz)|-blx.bib):source-files' '*:all-files'
 zstyle ':completion:*:*:nvim:*' file-patterns '^*(.(png|aux|log|pdf|bbl|blg|out|toc|run.xml|synctex.gz)|-blx.bib):source-files' '*:all-files'
+
+if command -v thefuck &> /dev/null; then
+    eval $(thefuck --alias)
+fi
