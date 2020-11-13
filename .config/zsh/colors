@@ -101,6 +101,9 @@ color() {
       SCHEME=help
     fi
   fi
+  local ALL_SCHEMES=$(find "$BASE16_DIR" -name 'base16-*.sh' | \
+      sed -E 's|.+/base16-||' | \
+      sed -E 's/\.sh//')
 
   case "$SCHEME" in
   help)
@@ -111,10 +114,12 @@ color() {
     return
     ;;
   ls)
-    find "$BASE16_DIR" -name 'base16-*.sh' | \
-      sed -E 's|.+/base16-||' | \
-      sed -E 's/\.sh//' | \
+    printf $ALL_SCHEMES | \
       column
+      ;;
+  rand)
+    __color $( printf $ALL_SCHEMES | \
+      shuf -n1)
       ;;
   -)
     if [[ -s "$BASE16_CONFIG_PREVIOUS" ]]; then
