@@ -1,6 +1,6 @@
 alias ll='/bin/ls -lFGh'
-alias lla='/bin/ls -lFGha'
-alias la='/bin/ls -aFG'
+alias lla='/bin/ls -lFGhA'
+alias la='/bin/ls -AFG'
 alias ls='/bin/ls -FG'
 alias sl='ls'
 alias anzeigen='defaults write com.apple.finder AppleShowAllFiles 1 && killall Finder'
