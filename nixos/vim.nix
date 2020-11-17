@@ -75,6 +75,8 @@ in {
             vim-jsx-pretty
             vim-test        # Run tests from inside vim
 
+            vim-which-key   # Show which keys correspond to which keybindings
+
             indentLine      # Show indentation levels
             ale             # Linting
             deoplete-nvim   # Code completion

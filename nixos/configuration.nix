@@ -10,7 +10,8 @@ let
 in {
   nixpkgs.config.allowUnfree = true; # for AndroidStudio
   imports =
-    [ # Include the results of the hardware scan.
+    [ <nixos-hardware/lenovo/thinkpad/l14/amd>
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       # Scripts for changing the brightness of the keyboard backlight
       ./keyboard_backlight_scripts.nix
@@ -23,7 +24,7 @@ in {
     ];
 
   nixpkgs.overlays = [
-    ( import ./overlays/i3.nix )
+    # ( import ./overlays/i3.nix )
     ( import ./overlays/neovim.nix )
   ];
 
@@ -179,11 +180,11 @@ in {
   #services.udev.packages = [ monitor_hotplugging ];
 
   # Fingerprint Reader
-  #services.fprintd.enable = true;
-  #security.pam.services = {
-  #  login.fprintAuth = true;
-  #  xscreensaver.fprintAuth = true;
-  #};
+  services.fprintd.enable = true;
+  security.pam.services = {
+    login.fprintAuth = true;
+    xscreensaver.fprintAuth = true;
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -219,7 +220,7 @@ in {
     #videoDrivers = [ "amdgpu" "radeon" ]; # "modesetting" ]; #amdgpu-pro
     windowManager.i3 = {
       enable = true;
-      package = pkgs.i3-gaps;
+      # package = pkgs.i3-gaps;
       extraPackages = with pkgs; [
         rofi dmenu
         i3status
