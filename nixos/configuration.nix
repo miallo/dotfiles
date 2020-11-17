@@ -6,6 +6,7 @@
 
 let
   stable = import <nixos-stable> { config = config.nixpkgs.config; };
+  sddm-themes = pkgs.libsForQt5.callPackage ./sddm-themes.nix {};
 in {
   nixpkgs.config.allowUnfree = true; # for AndroidStudio
   imports =
@@ -144,6 +145,10 @@ in {
 
     # Others
     yad
+
+    # Theme for SDDM
+    qt5.qtgraphicaleffects
+    sddm-themes.sddm-sugar-dark
   ];
 
   system.autoUpgrade = {
@@ -223,10 +228,14 @@ in {
       ];
     };
     xkbOptions = "ctrl:swapcaps";
-    displayManager.lightdm.enable = true;
+    # displayManager.lightdm.enable = true;
     #displayManager.lightdm.extraConfig = ''
     #  greeter-hide-users=false
     #'';
+    displayManager.sddm = {
+      enable = true;
+      theme = "sugar-dark";
+    };
     desktopManager.xterm.enable = false;
   
     # Enable touchpad support.
