@@ -19,13 +19,12 @@ in {
       ./custom_scripts.nix
       # ZSH-init
       #./zsh_config.nix
-      ./vim.nix
+      ./neovim
       ./suspend_on_low_battery.nix
     ];
 
   nixpkgs.overlays = [
     # ( import ./overlays/i3.nix )
-    ( import ./overlays/neovim.nix )
   ];
 
   # Use the systemd-boot EFI boot loader.
@@ -84,10 +83,10 @@ in {
     # Terminal emulator
     alacritty # termite
     # Basic shell stuff
-    curl zsh oh-my-zsh htop man_db tmux screen tree wget which xclip psmisc fd file
+    curl httpie zsh oh-my-zsh htop man_db tmux screen tree wget which xclip psmisc fd file
     usbutils pciutils envsubst
     # Fuzzy file finder
-    fzf
+    fzf ripgrep silver-searcher
 
     # correcting mistakes
     thefuck
@@ -119,7 +118,7 @@ in {
     # LaTeX
     stable.texlive.combined.scheme-full
     # OCR
-    tesseract
+    tesseract4
 
     # ##Programming
     gitAndTools.gitFull

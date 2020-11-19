@@ -4,7 +4,7 @@
     pname = "sddm-sugar-dark-theme";
     version = "1.2";
     dontBuild = true;
-    # propagatedBuildInputs = [ qtbase qtquickcontrols qtgraphicaleffects ];
+    buildInputs = [ qtbase qtquickcontrols qtgraphicaleffects ];
     installPhase = ''
       mkdir -p $out/share/sddm/themes
       cp -aR $src $out/share/sddm/themes/sugar-dark
