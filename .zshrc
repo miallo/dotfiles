@@ -67,6 +67,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 source ~/.bash_aliases
+source ~/.config/zsh/zsh_aliases
 
 # User configuration
 
@@ -108,10 +109,10 @@ export EDITOR='nvim'
 
 # Git not on the right but on the left
 #unset RPROMPT
-export ZSH_THEME_GIT_PROMPT_PREFIX="%{$reset_color%}%{$fg[green]%}("
-export ZSH_THEME_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
-export ZSH_THEME_GIT_PROMPT_DIRTY="*%{$reset_color%}"
-export ZSH_THEME_GIT_PROMPT_CLEAN=""
+export PS1_GIT_PROMPT_PREFIX="%{$reset_color%}%{$fg[green]%}("
+export PS1_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
+export PS1_GIT_PROMPT_DIRTY="*%{$reset_color%}"
+export PS1_GIT_PROMPT_CLEAN=""
 
 parse_git_branch() {
   (command git symbolic-ref -q HEAD || command git name-rev --name-only --no-undefined --always HEAD) 2>/dev/null
@@ -119,16 +120,16 @@ parse_git_branch() {
 
 parse_git_dirty() {
   if command git diff-index --quiet HEAD 2> /dev/null; then
-    echo "$ZSH_THEME_GIT_PROMPT_CLEAN"
+    echo "$PS1_GIT_PROMPT_CLEAN"
   else
     local number_files=$(git status -s -uno | wc -l | sed 's/^ *//')
-    echo "%{$fg[red]%}$number_files$ZSH_THEME_GIT_PROMPT_DIRTY"
+    echo "%{$fg[red]%}$number_files$PS1_GIT_PROMPT_DIRTY"
   fi
  }
 
 git_custom_status() {
   local git_where="$(parse_git_branch)"
-  [ -n "$git_where" ] && echo "$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_PREFIX${git_where#(refs/heads/|tags/)}$ZSH_THEME_GIT_PROMPT_SUFFIX"
+  [ -n "$git_where" ] && echo "$(parse_git_dirty)$PS1_GIT_PROMPT_PREFIX${git_where#(refs/heads/|tags/)}$PS1_GIT_PROMPT_SUFFIX"
 }
 
 
@@ -150,7 +151,8 @@ function cdla () { cd $@; la }
 
 typeset -A __WINCENT
 
-source $HOME/.config/zsh/colors
+fpath=($HOME/.config/zsh $fpath)
+source $HOME/.config/zsh/color
 
 zstyle ':completion:*:*:vim:*' file-patterns '^*(.(png|aux|log|pdf|bbl|blg|out|toc|run.xml|synctex.gz)|-blx.bib):source-files' '*:all-files'
 zstyle ':completion:*:*:nvim:*' file-patterns '^*(.(png|aux|log|pdf|bbl|blg|out|toc|run.xml|synctex.gz)|-blx.bib):source-files' '*:all-files'

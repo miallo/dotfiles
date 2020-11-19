@@ -1,0 +1,11 @@
+#compdef color
+
+_color() {
+}
+
+_color
+# local ALL_SCHEMES=$(find ~/.config/zsh/base16-shell/scripts -name 'base16-*.sh' | \
+#         sed -E 's|.+/base16-||' | \
+#         sed -E 's/\.sh//')
+
+# _arguments '1: :(World)' #$ALL_SCHEMES"

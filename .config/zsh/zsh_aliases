@@ -1,0 +1,1 @@
+alias -s {js,md,tex}='vim'

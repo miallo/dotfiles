@@ -40,7 +40,7 @@ luma() {
   echo "$COLOR_LUMA"
 }
 
-color() {
+colorx() {
   emulate -L zsh
 
   local SCHEME="$1"
@@ -111,6 +111,9 @@ color() {
     echo
     echo 'Available schemes:'
     color ls
+    echo
+    echo 'Chose Random Scheme:'
+    echo color rand
     return
     ;;
   ls)
@@ -148,9 +151,11 @@ function () {
     if [ "$BACKGROUND" != 'dark' -a "$BACKGROUND" != 'light' ]; then
       echo "warning: unknown background type in $__WINCENT[BASE16_CONFIG]"
     fi
-    color "$SCHEME"
+    colorx "$SCHEME"
   else
     # Default.
-    color default-dark
+    colorx default-dark
   fi
 }
+
+# unfunction luma
