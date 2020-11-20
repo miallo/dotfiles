@@ -85,7 +85,7 @@ in {
     alacritty # termite
     # Basic shell stuff
     curl httpie zsh oh-my-zsh htop man_db tmux screen tree wget which xclip psmisc fd file
-    usbutils pciutils envsubst
+    usbutils pciutils envsubst bat xxd
     # Fuzzy file finder
     fzf ripgrep silver-searcher
 
@@ -135,13 +135,14 @@ in {
     nodejs jq #nodePackages.node2nix #nodePackages.expo-cli nodePackages.react-native-cli
     # Python
     python3
+    python38Packages.binwalk-full
     #python3Packages.notebook #python3Packages.pygments python3Packages.matplotlib python3Packages.numpy python3Packages.scipy
 
     # vimwiki => html converter
     pandoc
 
     # Editors
-    emacs #atom
+    # emacs #atom
 
 
     # Others
