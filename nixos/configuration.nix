@@ -26,6 +26,7 @@ in {
   nixpkgs.overlays = [
     # ( import ./overlays/i3.nix )
     ( import ./overlays/pcmanfm.nix )
+    ( import ./overlays/mattermost-desktop.nix )
   ];
 
   # Use the systemd-boot EFI boot loader.
