@@ -1,2 +1,2 @@
 # dotfiles
-My Dotfiles (.bashrc, .zshrc, ...)
+My Dotfiles (`nixos`, `vim`, `i3`, `bash`, `zsh`, ...)
