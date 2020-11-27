@@ -103,6 +103,8 @@ in {
     pcmanfm vifm
     # Browser
     firefox ungoogled-chromium #chromium #
+    # Downloader
+    youtube-dl
     # Mail
     thunderbird
     # Messenger
@@ -175,6 +177,8 @@ in {
 
   programs.steam.enable = true;
 
+  services.fwupd.enable = true;
+
   # List services that you want to enable:
   # USB Automounting
   services.gvfs.enable = true;  
@@ -214,6 +218,10 @@ in {
 
   environment.pathsToLink = [ "/libexec" ];
 
+  services.logind.extraConfig =''
+    HandlePowerKey=ignore
+  '';
+
   services.xserver = {
     # Enable the X11 windowing system.
     enable = true;
@@ -222,7 +230,6 @@ in {
     #videoDrivers = [ "amdgpu" "radeon" ]; # "modesetting" ]; #amdgpu-pro
     windowManager.i3 = {
       enable = true;
-      # package = pkgs.i3-gaps;
       extraPackages = with pkgs; [
         rofi dmenu
         i3status
@@ -230,7 +237,7 @@ in {
         i3blocks
       ];
     };
-    xkbOptions = "ctrl:swapcaps";
+    # xkbOptions = "ctrl:swapcaps";
     # displayManager.lightdm.enable = true;
     #displayManager.lightdm.extraConfig = ''
     #  greeter-hide-users=false
@@ -257,6 +264,9 @@ in {
     #displayManager.sddm.enable = true;
     #desktopManager.plasma5.enable = true;
   };
+
+  # Automatically detect external monitors
+  services.autorandr.enable = true;
 
 
   location.latitude = 51.0;

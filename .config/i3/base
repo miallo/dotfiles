@@ -21,8 +21,20 @@ font pango:System San Francisco Display 11
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+set $WORK1 "1: Internet"
+set $WORK2 "2: >_"
+set $WORK3 "3"
+#set $WORK4 "4: Nautilus"
+set $WORK4 "4: FM"
+set $WORK5 "5"
+set $WORK6 "6"
+set $WORK7 "7"
+set $WORK8 "8"
+set $WORK9 "9: E-Mail"
+set $WORK10 "10: Messenger"
 # start a terminal
-bindsym $mod+Return		exec alacritty #i3-sensible-terminal
+#bindsym $mod+Return		exec alacritty #i3-sensible-terminal
+bindsym $mod+Return exec --no-startup-id alacritty
 # bindsym $mod+Return	exec xterm -fa 'Monospace' -fs 10
 
 # kill focused window
@@ -99,19 +111,6 @@ bindsym --release	$mod+w			workspace back_and_forth
 bindsym				$mod+w			workspace back_and_forth
 bindsym				$mod+Shift+w	workspace back_and_forth
 
-# Icons in font see https://fontawesome.com/cheatsheet/free/regular
-# In `bar {}` it is the FontAwesome* fonts
-set $WORK1 "1: Internet"
-set $WORK2 "2: >_"
-set $WORK3 "3"
-#set $WORK4 "4: Nautilus"
-set $WORK4 "4: FM"
-set $WORK5 "5"
-set $WORK6 "6"
-set $WORK7 "7"
-set $WORK8 "8"
-set $WORK9 "9: E-Mail"
-set $WORK10 "10: Messenger"
 
 # switch to workspace
 bindsym $mod+1 workspace $WORK1

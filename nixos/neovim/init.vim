@@ -329,6 +329,8 @@ nnoremap <silent> <localleader> :<c-u>WhichKey  ','<CR>
 " let g:AutoPairsShortcutJump = '<M-Shift-n>'
 " let g:AutoPairsShortcutJump = '<M-Shift-n>'
 
+" loupe
+let g:LoupeCenterResults=0
 
 set list                              " show whitespace
 set listchars=nbsp:⦸                  " CIRCLED REVERSE SOLIDUS (U+29B8, UTF-8: E2 A6 B8)
