@@ -22,12 +22,12 @@ set wildignore+=**/android/*
 set wildignore+=**/ios/*
 set wildignore+=**/.git/*
 
-" `<Tab>`/`<S-Tab>` to move between matches without leaving incremental search.
-" Note dependency on `'wildcharm'` being set to `<C-z>` in order for this to
-" work.
-set wildcharm=<C-z>
-cnoremap <expr> <Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>/<C-r>/' : '<C-z>'
-cnoremap <expr> <S-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>?<C-r>/' : '<S-Tab>'
+" " `<Tab>`/`<S-Tab>` to move between matches without leaving incremental search.
+" " Note dependency on `'wildcharm'` being set to `<C-z>` in order for this to
+" " work.
+" set wildcharm=<C-z>
+" cnoremap <expr> <Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>/<C-r>/' : '<C-z>'
+" cnoremap <expr> <S-Tab> getcmdtype() == '/' \|\| getcmdtype() == '?' ? '<CR>?<C-r>/' : '<S-Tab>'
 
 " IMPORTANT: grep will sometimes skip displaying the file name if you
 " search in a singe file. This will confuse Latex-Suite. Set your grep
@@ -262,6 +262,13 @@ nmap <silent> t<C-s> :TestSuite<CR>
 nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
 
+" ultisnips: create snipets
+let g:UltiSnipsSnippetsDir = expand("~/.vim/UltiSnips")
+let g:UltiSnipsSnippetDirectories= [ UltiSnipsSnippetsDir ]
+if !isdirectory(UltiSnipsSnippetsDir)
+    exec "!git clone git@github.com:miallo/ultisnips-snippets.git ".expand(UltiSnipsSnippetsDir)
+endif
+
 " FZF to find files fuzzily from Sebastian
 " let FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden'
 " " Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
@@ -276,8 +283,9 @@ nmap <silent> t<C-g> :TestVisit<CR>
 " command! -bang -nargs=? -complete=dir Files
 "             \ call fzf#vim#files(<q-args>, {'options': ['--layout=reverse', '--info=inline', '--preview', '${pkgs.vimPlugins.fzf-vim}/bin/preview.sh {}']}, <bang>0)
 
-" ctrlp stuff
-"let g:ctrlp_max_height = 30
+" Command-T: fuzzy file finder
+" use git for finding files => accepts .gitignore. If no git repo => use find
+let g:CommandTFileScanner='git'
 
 " Python folding
 " mkdir -p ~/.vim/ftplugin

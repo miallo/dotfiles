@@ -86,6 +86,8 @@ in {
             vim-jsx-pretty
             vim-test             # Run tests from inside vim
 
+            ultisnips            # Snippets
+
             vim-which-key        # Show which keys correspond to which <leader> keybindings
 
             indentLine           # Show indentation levels
