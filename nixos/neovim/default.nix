@@ -17,12 +17,15 @@ let
   };
   loupe = pkgs.vimUtils.buildVimPlugin {
     pname = "loupe";
-    version = "2020-10-12";
+    version = "2020-11-28";
+    # src = builtins.fetchGit {
+    #   url = "/home/michael/loupe";
+    # };
     src = pkgs.fetchFromGitHub {
-      owner = "wincent";
+      owner = "miallo";
       repo = "loupe";
-      rev = "fdbfee0cffe094f0aa7e9039760633380fdb55f8";
-      sha256 = "1mam21z6gbzfsx764mjcdbkbm7043jb8mpph9q7n3f32w351igjs";
+      rev = "master";
+      sha256 = "1r0dgg8b6b2dfnh9kps2nsyqc4vq2kdxz4xjfhjvcz7cl33sqqas";
     };
     meta = {
       description = "Make search/regex work bit more sensible";
@@ -70,11 +73,12 @@ in {
             matchit-zip     # `%` includes if/else, tags, ...
             # auto-pairs      # Add closing parantheses...
             # rainbow         # Color parantheses in pairs
-            fzf-vim         # fuzzy file finder
+            fzf-vim         # Fuzzy file finder
+            ctrlp-vim       # Fuzzy file finder
+            #nerdtree        # Filefinder
+
             loupe           # Search magically
             terminus        # Make terminal vim behave a bit more graphical
-            #YouCompleteMe
-            #ctrlp.vim'
             vim-latex
             vim-css-color
             vim-javascript
@@ -82,15 +86,15 @@ in {
             vim-jsx-pretty
             vim-test        # Run tests from inside vim
 
-            vim-which-key   # Show which keys correspond to which keybindings
+            vim-which-key   # Show which keys correspond to which <leader> keybindings
 
             indentLine      # Show indentation levels
             ale             # Linting
             deoplete-nvim   # Code completion
-            base16-vim      # Colors
-            #nerdtree        # Filefinder
-            #vim-gutentags
-            #vim-fireplace   # Clojure
+            # YouCompleteMe   # Code completion
+            base16-vim      # Color themes
+            # vim-gutentags   # generate c-tags for jumping
+            # vim-fireplace   # Clojure
             vim-commentary  # Comment/uncomment with gcc
             vimwiki         # Have markdown-wiki at ~/.vimwiki
           ];
