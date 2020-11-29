@@ -154,6 +154,9 @@ in {
     # Theme for SDDM
     qt5.qtgraphicaleffects
     sddm-themes.sddm-sugar-dark
+
+    # Show pressed keys
+    screenkey
   ];
 
   system.autoUpgrade = {
@@ -207,13 +210,26 @@ in {
 
   # Enable sound.
   sound.enable = true;
+
+  # Steam
   hardware.opengl.driSupport32Bit = true;
   hardware.opengl.extraPackages32 = with pkgs.pkgsi686Linux; [ libva ];
-  hardware.pulseaudio.enable = true;
-  hardware.pulseaudio.support32Bit = true;
+
+  # # Bluetooth headset
+  # services.ofono = {
+  #   enable = true;
+  #   plugins = [ pkgs.ofono-phonesim ];
+  # };
+  hardware.pulseaudio = {
+    enable = true;
+    support32Bit = true;
+    package = pkgs.pulseaudioFull;
+  };
+
   hardware.bluetooth = {
     enable = true;
     config.General.ControllerMode = "bredr"; #"dual";
+    package = pkgs.bluezFull;
   };
 
   environment.pathsToLink = [ "/libexec" ];
