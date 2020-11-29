@@ -62,41 +62,41 @@ in {
       configure = {
         packages.myPlugins = with pkgs.vimPlugins; {
           start = [
-            vim-rooter      # make folder of .git/ to vim path
-            vim-lastplace   # Open file at last known cursor position
-            vim-nix         # Nix-syntax highlighting
-            vim-fugitive    # Git wrapper
-            gitgutter       # Show which lines changed
+            vim-rooter           # make folder of .git/ to vim path
+            vim-lastplace        # Open file at last known cursor position
+            vim-nix              # Nix-syntax highlighting
+            vim-fugitive         # Git wrapper
+            gitgutter            # Show which lines changed
 
-            vim-eunuch      # Rename/move files
-            vim-surround    # Change surrounding paranths/quotes with :cs"'
-            matchit-zip     # `%` includes if/else, tags, ...
-            # auto-pairs      # Add closing parantheses...
-            # rainbow         # Color parantheses in pairs
-            fzf-vim         # Fuzzy file finder
-            ctrlp-vim       # Fuzzy file finder
-            #nerdtree        # Filefinder
+            vim-eunuch           # Rename/move files
+            vim-surround         # Change surrounding paranths/quotes with :cs"'
+            matchit-zip          # `%` includes if/else, tags, ...
+            # auto-pairs           # Add closing parantheses...
+            # rainbow              # Color parantheses in pairs
+            fzf-vim              # Fuzzy file finder
+            command-t            # Fuzzy file finder
+            #nerdtree             # Filefinder
 
-            loupe           # Search magically
-            terminus        # Make terminal vim behave a bit more graphical
+            loupe                # Search magically
+            terminus             # Make terminal vim behave a bit more graphical
             vim-latex
             vim-css-color
             vim-javascript
             #vim-js-file-import
             vim-jsx-pretty
-            vim-test        # Run tests from inside vim
+            vim-test             # Run tests from inside vim
 
-            vim-which-key   # Show which keys correspond to which <leader> keybindings
+            vim-which-key        # Show which keys correspond to which <leader> keybindings
 
-            indentLine      # Show indentation levels
-            ale             # Linting
-            deoplete-nvim   # Code completion
-            # YouCompleteMe   # Code completion
-            base16-vim      # Color themes
-            # vim-gutentags   # generate c-tags for jumping
-            # vim-fireplace   # Clojure
-            vim-commentary  # Comment/uncomment with gcc
-            vimwiki         # Have markdown-wiki at ~/.vimwiki
+            indentLine           # Show indentation levels
+            ale                  # Linting
+            deoplete-nvim        # Code completion
+            # YouCompleteMe        # Code completion
+            base16-vim           # Color themes
+            # vim-gutentags        # generate c-tags for jumping
+            # vim-fireplace        # Clojure
+            vim-commentary       # Comment/uncomment with gcc
+            vimwiki              # Have markdown-wiki at ~/.vimwiki
           ];
           opt = [];
         };
