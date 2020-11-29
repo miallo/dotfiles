@@ -7,8 +7,8 @@ self: super: {
     src = super.fetchFromGitHub {
       owner = "neovim";
       repo = "neovim";
-      rev = "0a95549d66df63c06d775fcc329f7b63cbb46b2f";
-      sha256 = "0a54xjd31dvz32hkzc8qhjnnp6g7v3npk5a5bdnlzh2mhxjnqyl4";
+      rev = "ba13b94f5aab734bdb242d515ac43d973ba6c6c5";
+      sha256 = "1aawhd6r9ad88rllps8dlj6iivzb0kxmq10311kw8kbzsmi5vlyc";
     };
     patches = [ ./system_rplugin_manifest.patch ];
     buildInputs = oldAttrs.buildInputs ++ [ super.pkgs.tree-sitter ];
