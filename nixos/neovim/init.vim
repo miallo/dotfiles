@@ -97,8 +97,8 @@ set splitright splitbelow
 nnoremap s :exec "normal i".nr2char(getchar())."\e"<CR>
 nnoremap S :exec "normal a".nr2char(getchar())."\e"<CR>
 
-" Toggle fold at current position.
-nnoremap <Tab> za
+" " Toggle fold at current position.
+" nnoremap <Tab> za
 if has('folding')
     if has('windows')
         set fillchars=diff:∙               " BULLET OPERATOR (U+2219, UTF-8: E2 88 99)
@@ -238,8 +238,8 @@ let g:deoplete#custom#sources#ale#rank = 999
 "call deoplete#custom#option('sources', {
 "  \ '_': ['ale'],
 "\})
-" deoplete tab-complete
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+" " deoplete tab-complete
+" inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 "" ALE: run prettier and linter
 if exists("g:deoplete#enable_at_startup")
@@ -263,10 +263,11 @@ nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
 
 " ultisnips: create snipets
-let g:UltiSnipsSnippetsDir = expand("~/.vim/UltiSnips")
+g:UltiSnipsEditSplit='vertical'
+let g:UltiSnipsSnippetsDir = expand('~/.vim/UltiSnips')
 let g:UltiSnipsSnippetDirectories= [ UltiSnipsSnippetsDir ]
-if !isdirectory(UltiSnipsSnippetsDir)
-    exec "!git clone git@github.com:miallo/ultisnips-snippets.git ".expand(UltiSnipsSnippetsDir)
+if !isdirectory(UltiSnipsSnippetsDir) && !exists('$SUDO_USER')
+    exec '!git clone git@github.com:miallo/ultisnips-snippets.git ' . expand(UltiSnipsSnippetsDir)
 endif
 
 " FZF to find files fuzzily from Sebastian

@@ -46,6 +46,18 @@ let
       license = pkgs.lib.licenses.bsd2;
     };
   };
+  # my-ultiSnips-vim = pkgs.vimUtils.buildVimPlugin {
+  #   pname = "ultisnips";
+  #   version = "2020-11-23";
+  #   src = pkgs.fetchFromGitHub {
+  #     owner = "SirVer";
+  #     repo = "ultisnips";
+  #     rev = "8554371b57c8989cf73f73f288c456fb3f2a3a3a";
+  #     sha256 = "0v3gyql3br11rl6ycl7i3zkx8kkc5f2w075y6cm6cslb9v124h6q";
+  #   };
+  #   dontBuild = true;
+  #   meta.homepage = "https://github.com/SirVer/ultisnips/";
+  # };
 
 in {
   nixpkgs.overlays = [

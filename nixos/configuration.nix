@@ -6,6 +6,7 @@
 
 let
   stable = import <nixos-stable> { config = config.nixpkgs.config; };
+  unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
   sddm-themes = pkgs.libsForQt5.callPackage ./sddm-themes.nix {};
 in {
   nixpkgs.config.allowUnfree = true; # for AndroidStudio
@@ -62,6 +63,12 @@ in {
   # Set your time zone.
   time.timeZone = "Europe/Amsterdam";
 
+  nix = {
+    package = pkgs.nixFlakes;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+   };
   nix.gc.automatic = false;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -229,7 +236,7 @@ in {
   hardware.bluetooth = {
     enable = true;
     config.General.ControllerMode = "bredr"; #"dual";
-    package = pkgs.bluezFull;
+    # package = pkgs.bluezFull;
   };
 
   environment.pathsToLink = [ "/libexec" ];
