@@ -2,16 +2,15 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 let
-  stable = import <nixos-stable> { config = config.nixpkgs.config; };
-  unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
+  # stable = import inputs.nixos-stable {};
   sddm-themes = pkgs.libsForQt5.callPackage ./sddm-themes.nix {};
 in {
   nixpkgs.config.allowUnfree = true; # for AndroidStudio
   imports =
-    [ <nixos-hardware/lenovo/thinkpad/l14/amd>
+    [  # (inputs.nixos-hardware + "/lenovo/thinkpad/l14/amd")
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
       # Scripts for changing the brightness of the keyboard backlight
@@ -127,7 +126,7 @@ in {
     # Documents
     libreoffice
     # LaTeX
-    stable.texlive.combined.scheme-full
+    # stable.texlive.combined.scheme-full
     # OCR
     tesseract4
 
