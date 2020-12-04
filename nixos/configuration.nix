@@ -69,6 +69,7 @@ in {
     '';
    };
   nix.gc.automatic = false;
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -184,7 +185,7 @@ in {
 
   # List services that you want to enable:
   # USB Automounting
-  services.gvfs.enable = true;  
+  services.gvfs.enable = true;
 
   #services.udev.packages = [ monitor_hotplugging ];
 
@@ -259,12 +260,14 @@ in {
     #displayManager.lightdm.extraConfig = ''
     #  greeter-hide-users=false
     #'';
+
     displayManager.sddm = {
       enable = true;
       theme = "sugar-dark";
     };
+
     desktopManager.xterm.enable = false;
-  
+
     # Enable touchpad support.
     libinput = {
       enable = true;
@@ -276,16 +279,13 @@ in {
       # lower right corner of trackpad not treated as right click
       clickMethod = "clickfinger";
     };
-  
-    # Enable the KDE Desktop Environment.
-    #displayManager.sddm.enable = true;
-    #desktopManager.plasma5.enable = true;
   };
 
   # Automatically detect external monitors
   services.autorandr.enable = true;
 
 
+  # Display will turn red at night
   location.latitude = 51.0;
   location.longitude = 7.0;
   services.redshift = {
