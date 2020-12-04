@@ -234,8 +234,9 @@ in {
 
   environment.pathsToLink = [ "/libexec" ];
 
+  # Don't turn off, if only taping the power key
   services.logind.extraConfig =''
-    HandlePowerKey=ignore
+    HandlePowerKey=suspend-then-hibernate
   '';
 
   services.xserver = {
