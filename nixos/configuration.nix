@@ -158,17 +158,11 @@ in {
     yad
 
     # Theme for SDDM
-    qt5.qtgraphicaleffects
     sddm-themes.sddm-sugar-dark
 
     # Show pressed keys
     screenkey
   ];
-
-  system.autoUpgrade = {
-    enable = true;
-    dates = "04:30";
-  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions
