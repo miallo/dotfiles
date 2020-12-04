@@ -242,16 +242,33 @@ let g:deoplete#custom#sources#ale#rank = 999
 " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 "" ALE: run prettier and linter
-if exists("g:deoplete#enable_at_startup")
-    let g:ale_completion_enabled = g:deoplete#enable_at_startup ? 0 : 1
-else
-    let g:ale_completion_enabled = 1
-endif
+nmap <leader>gd <Plug>(ale_go_to_definition)
+nmap <leader>gsd <Plug>(ale_go_to_definition_in_split)
+nmap <leader>gvd <Plug>(ale_go_to_definition_in_vsplit)
+nmap <leader>afr <Plug>(ale_find_references)
+nmap <leader>arn <Plug>(ale_rename)
+nmap <leader>aim <Plug>(ale_import)
+" go to next/previous linter error
+nmap <leader>aj <Plug>(ale_next_wrap)
+nmap <leader>ak <Plug>(ale_previous_wrap)
+imap <C-Space> <Plug>(ale_complete)
+
+augroup ale-go-to-definition
+    au!
+    autocmd FileType javascript nmap <buffer> <c-]> <Plug>(ale_go_to_definition)
+    autocmd FileType typescript nmap <buffer> <c-]> <Plug>(ale_go_to_definition)
+    autocmd FileType typescriptreact nmap <buffer> <c-]> <Plug>(ale_go_to_definition)
+augroup END
+let g:ale_completion_enabled = get(g:,"g:deoplete#enable_at_startup", 0) ? 0 : 1
 let g:ale_completion_autoimport = 1
 "JS-files fix eslint format on save
 let g:ale_fixers = {
             \ 'javascript': ['prettier', 'eslint'],
-            \ 'latex': ['latexindent', 'textlint']
+            \ 'latex': ['latexindent', 'textlint'],
+            \ 'python': ['autopep8']
+            \ }
+let g:ale_linters = {
+            \ 'python': ['flake8', 'pylint']
             \ }
 let g:ale_fix_on_save = 1
 
