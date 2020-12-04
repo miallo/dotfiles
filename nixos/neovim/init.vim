@@ -280,13 +280,19 @@ nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
 
 " ultisnips: create snipets
-g:UltiSnipsEditSplit='vertical'
+let g:UltiSnipsEditSplit='vertical'
 let g:UltiSnipsSnippetsDir = expand('~/.vim/UltiSnips')
 let g:UltiSnipsSnippetDirectories= [ UltiSnipsSnippetsDir ]
 if !isdirectory(UltiSnipsSnippetsDir) && !exists('$SUDO_USER')
     exec '!git clone git@github.com:miallo/ultisnips-snippets.git ' . expand(UltiSnipsSnippetsDir)
 endif
 
+" fzf.vim: find files/lines/buffers/commits fuzzily
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fgf :GFiles<CR> " For git files
+nnoremap <leader>fb :Buffers<CR> " Search buffers
+nnoremap <leader>fa :Ag<space>
+nnoremap <leader>frg :Rg<space>
 " FZF to find files fuzzily from Sebastian
 " let FZF_DEFAULT_COMMAND = 'rg --files --no-ignore-vcs --hidden'
 " " Similarly, we can apply it to fzf#vim#grep. To use ripgrep instead of ag:
