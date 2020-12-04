@@ -226,7 +226,6 @@ set background=light
 "################################# Plugins  ################################"
 "" Deoplete: code completion
 let g:deoplete#enable_at_startup = 1
-"Add extra filetypes
 let g:deoplete#sources#ale#filetypes = [
             \ 'jsx',
             \ 'javascript.jsx',
@@ -234,14 +233,11 @@ let g:deoplete#sources#ale#filetypes = [
             \ 'javascript'
             \ ]
 let g:deoplete#custom#sources#ale#rank = 999
-"autocmd VimEnter * call deoplete#custom#source('ale', 'rank', 999)
-"call deoplete#custom#option('sources', {
-"  \ '_': ['ale'],
-"\})
 " " deoplete tab-complete
 " inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
-"" ALE: run prettier and linter
+"" ALE: interact with the LSP (language server protocol) to understand syntax
+"       of projects. Also adds linting & prettier
 nmap <leader>gd <Plug>(ale_go_to_definition)
 nmap <leader>gsd <Plug>(ale_go_to_definition_in_split)
 nmap <leader>gvd <Plug>(ale_go_to_definition_in_vsplit)
@@ -251,7 +247,6 @@ nmap <leader>aim <Plug>(ale_import)
 " go to next/previous linter error
 nmap <leader>aj <Plug>(ale_next_wrap)
 nmap <leader>ak <Plug>(ale_previous_wrap)
-imap <C-Space> <Plug>(ale_complete)
 
 augroup ale-go-to-definition
     au!
@@ -259,6 +254,8 @@ augroup ale-go-to-definition
     autocmd FileType typescript nmap <buffer> <c-]> <Plug>(ale_go_to_definition)
     autocmd FileType typescriptreact nmap <buffer> <c-]> <Plug>(ale_go_to_definition)
 augroup END
+
+" Don't use ale completion and deoplete together
 let g:ale_completion_enabled = get(g:,"g:deoplete#enable_at_startup", 0) ? 0 : 1
 let g:ale_completion_autoimport = 1
 "JS-files fix eslint format on save
