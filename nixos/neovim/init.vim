@@ -119,6 +119,10 @@ noremap Y y$
 nnoremap <expr> k (v:count > 5 ? "m'" . v:count : "") . 'k'
 nnoremap <expr> j (v:count > 5 ? "m'" . v:count : "") . 'j'
 
+" Move vertically until on a non whitespace character
+nnoremap cd /\%<C-R>=virtcol(".")<CR>v\S<CR>
+nnoremap cu ?\%<C-R>=virtcol(".")<CR>v\S<CR>
+
 set whichwrap=b,<,>,[,],~       " allow <BS>/h/l/<Left>/<Right>/<Space>, ~ to cross line boundaries
 
 " Line numbering
