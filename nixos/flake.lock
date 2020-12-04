@@ -31,41 +31,26 @@
         "type": "github"
       }
     },
-    "nixos-unstable": {
-      "locked": {
-        "lastModified": 1605874265,
-        "narHash": "sha256-IrKUZ1UzN7wXRv3bFlLS/svNGIeT8d0n/F7woad29Io=",
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "4dd5da0ad0efec7e140f77b2d8988a84f5d72f14",
-        "type": "github"
-      },
-      "original": {
-        "owner": "NixOS",
-        "repo": "nixpkgs",
-        "rev": "4dd5da0ad0efec7e140f77b2d8988a84f5d72f14",
-        "type": "github"
-      }
-    },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1605874265,
-        "narHash": "sha256-IrKUZ1UzN7wXRv3bFlLS/svNGIeT8d0n/F7woad29Io=",
-        "owner": "NixOS",
+        "lastModified": 1607037303,
+        "narHash": "sha256-W8JkXp/cefZLecDUTdKMkZruht97kHhP7xuyQOp8LFY=",
+        "owner": "miallo",
         "repo": "nixpkgs",
-        "rev": "4dd5da0ad0efec7e140f77b2d8988a84f5d72f14",
+        "rev": "40445840f4039693f7836c42b8d788f1b681732e",
         "type": "github"
       },
       "original": {
-        "owner": "NixOS",
-        "ref": "nixos-20.03",
+        "owner": "miallo",
+        "ref": "my-nixos",
         "repo": "nixpkgs",
-        "rev": "4dd5da0ad0efec7e140f77b2d8988a84f5d72f14",
         "type": "github"
       }
     },
     "root": {
       "inputs": {
+        "nixos-hardware": "nixos-hardware",
+        "nixos-stable": "nixos-stable",
         "nixpkgs": "nixpkgs"
       }
     }
