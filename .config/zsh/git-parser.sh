@@ -10,6 +10,7 @@ ZSH_THEME_GIT_PROMPT_SEPARATOR="|"
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[magenta]%}"
 ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}%{●%G%}"
 ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{✖%G%}"
+ZSH_THEME_GIT_PROMPT_RENAMED_OR_MOVED="%{$fg[cyan]%}%{·%G%}"
 ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}%{-%G%}"
 ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}%{✚%G%}"
 ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[yellow]%}%{+%G%}"
@@ -46,6 +47,7 @@ parse_git() {
     GIT_CHANGED=0
     GIT_CONFLICTS=0
     GIT_DELETED=0
+    GIT_RENAMED_OR_COPIED=0
     GIT_STAGED=0
     GIT_UNTRACKED=0
     for line (${(f)git_status}); do
@@ -106,8 +108,8 @@ parse_git() {
             "U"?*)
                 ((GIT_CONFLICTS++))
                 ;;
-            ?"R"*|"R"?*)
-                ((GIT_RENAMED++))
+            ?"R"*|"R"?*|?"C"*|"C"?*)
+                ((GIT_RENAMED_OR_COPIED++))
                 ;;
             "A"?*)
                 ((GIT_ADDED++))
@@ -138,6 +140,9 @@ git_super_status() {
     if [ "$GIT_CONFLICTS" -ne "0" ]; then
         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CONFLICTS$GIT_CONFLICTS%{${reset_color}%}"
     fi
+    if [ "$GIT_RENAMED_OR_COPIED" -ne "0" ]; then
+        STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_RENAMED_OR_MOVED$GIT_RENAMED_OR_COPIED%{${reset_color}%}"
+    fi
     if [ "$GIT_DELETED" -ne "0" ]; then
         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_DELETED$GIT_DELETED%{${reset_color}%}"
     fi
@@ -150,7 +155,7 @@ git_super_status() {
     if [ "$GIT_UNTRACKED" -ne "0" ]; then
         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED$GIT_UNTRACKED%{${reset_color}%}"
     fi
-    if [ "$GIT_CHANGED" -eq "0" ] && [ "$GIT_DELETED" -eq "0" ] && [ "$GIT_CONFLICTS" -eq "0" ] && [ "$GIT_STAGED" -eq "0" ] && [ "$GIT_UNTRACKED" -eq "0" ]; then
+    if [ "$GIT_ADDED" -eq "0" ] && [ "$GIT_CHANGED" -eq "0" ] && [ "$GIT_CONFLICTS" -eq "0" ] && [ "$GIT_DELETED" -eq "0" ] && [ "$GIT_RENAMED_OR_COPIED" -eq "0" ] && [ "$GIT_STAGED" -eq "0" ]; then
         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
     fi
     STATUS="$STATUS%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
