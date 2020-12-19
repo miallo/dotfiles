@@ -107,40 +107,12 @@ export EDITOR='nvim'
 
 #export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#AAAAAA"
 
-# Git not on the right but on the left
-#unset RPROMPT
-export PS1_GIT_PROMPT_PREFIX="%{$reset_color%}%{$fg[green]%}("
-export PS1_GIT_PROMPT_SUFFIX=")%{$reset_color%}"
-export PS1_GIT_PROMPT_DIRTY="*%{$reset_color%}"
-export PS1_GIT_PROMPT_CLEAN=""
-
-parse_git_branch() {
-  (command git symbolic-ref -q HEAD || command git name-rev --name-only --no-undefined --always HEAD) 2>/dev/null
-}
-
-parse_git_dirty() {
-  if command git diff-index --quiet HEAD 2> /dev/null; then
-    echo "$PS1_GIT_PROMPT_CLEAN"
-  else
-    local number_files=$(git status -s -uno | wc -l | sed 's/^ *//')
-    echo "%{$fg[red]%}$number_files$PS1_GIT_PROMPT_DIRTY"
-  fi
- }
-
-git_custom_status() {
-  local git_where="$(parse_git_branch)"
-  [ -n "$git_where" ] && echo "$(parse_git_dirty)$PS1_GIT_PROMPT_PREFIX${git_where#(refs/heads/|tags/)}$PS1_GIT_PROMPT_SUFFIX"
-}
-
-
-
-
 
 # Path in prompt shortened
 setopt prompt_subst
 
 #PS1='%n $(shrink_path -f) $(git_super_status)> '
-PS1='$(shrink_path -f) $(git_custom_status)> '
+PS1='$(shrink_path -f) $($HOME/.config/zsh/git-parser.sh)> '
 
 
 # cd does not automatically push to pushd/popd/dirs stack
