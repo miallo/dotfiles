@@ -181,27 +181,27 @@ vnoremap > >gv
 
 
 augroup python
-    au!
-    au FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-    au FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
-    au FileType python nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
-    au FileType python imap <buffer> <c-c> #################################################################
-    "au FileType python imap <silent> <buffer> . .<C-X><C-O>
+    autocmd!
+    autocmd FileType python map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+    autocmd FileType python imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+    autocmd FileType python nnoremap <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+    autocmd FileType python imap <buffer> <c-c> #################################################################
+    "autocmd FileType python imap <silent> <buffer> . .<C-X><C-O>
 augroup END
 
 augroup latex
-    au!
+    autocmd!
     "F12 als make Prohaupt.pdf
-    au FileType tex imap <buffer> <C-B> <Plug>Tex_MathBF
-    au FileType tex imap <buffer> <C-I> <Plug>Tex_InsertItemOnThisLine
-    au FileType tex imap <buffer> <F12> <esc>:w<CR>:!pdflatex -shell-escape %<CR><CR>
-    au FileType tex imap <buffer> <c-c> <++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++>
-    au FileType tex map <buffer> <F12> :w<CR>:!pdflatex -shell-escape %<CR><CR>
+    autocmd FileType tex imap <buffer> <C-B> <Plug>Tex_MathBF
+    autocmd FileType tex imap <buffer> <C-I> <Plug>Tex_InsertItemOnThisLine
+    autocmd FileType tex imap <buffer> <F12> <esc>:w<CR>:!pdflatex -shell-escape %<CR><CR>
+    autocmd FileType tex imap <buffer> <c-c> <++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++>
+    autocmd FileType tex map <buffer> <F12> :w<CR>:!pdflatex -shell-escape %<CR><CR>
     "toggle between lists and comma separated text
-    au FileType tex nmap  <LocalLeader>l   :call ListTrans_toggle_format()<CR>
-    au FileType tex xmap  <LocalLeader>l   :call ListTrans_toggle_format('visual')<CR>
-    au FileType tex call Tex_MakeMap('<leader>ll', ':update!<CR>:call Tex_RunLaTeX()<CR>', 'n', '<buffer>')
-    au FileType tex call Tex_MakeMap('<leader>ll', '<ESC>:update!<CR>:call Tex_RunLaTeX()<CR>', 'v', '<buffer>')
+    autocmd FileType tex nmap  <LocalLeader>l   :call ListTrans_toggle_format()<CR>
+    autocmd FileType tex xmap  <LocalLeader>l   :call ListTrans_toggle_format('visual')<CR>
+    autocmd FileType tex call Tex_MakeMap('<leader>ll', ':update!<CR>:call Tex_RunLaTeX()<CR>', 'n', '<buffer>')
+    autocmd FileType tex call Tex_MakeMap('<leader>ll', '<ESC>:update!<CR>:call Tex_RunLaTeX()<CR>', 'v', '<buffer>')
 augroup END
 
 set list                              " show whitespace
@@ -254,7 +254,7 @@ nmap <leader>aj <Plug>(ale_next_wrap)
 nmap <leader>ak <Plug>(ale_previous_wrap)
 
 augroup ale-go-to-definition
-    au!
+    autocmd!
     autocmd FileType javascript nmap <buffer> <c-]> <Plug>(ale_go_to_definition)
     autocmd FileType typescript nmap <buffer> <c-]> <Plug>(ale_go_to_definition)
     autocmd FileType typescriptreact nmap <buffer> <c-]> <Plug>(ale_go_to_definition)
@@ -341,8 +341,8 @@ let g:vimwiki_list = [
 let g:vimwiki_hl_headers = 1
 " let g:vimwiki_ext2syntax = {'.md': 'markdown'}
 "augroup vimwiki
-"  au!
-"  au FileType vimwiki nnoremap  <Leader>wl <Plug>VimwikiVSplitLink
+"  autocmd!
+"  autocmd FileType vimwiki nnoremap  <Leader>wl <Plug>VimwikiVSplitLink:
 "augroup END
 
 " indentLine: show indentations
