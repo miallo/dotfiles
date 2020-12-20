@@ -1,11 +1,10 @@
+set nocompatible
+set encoding=utf-8
+
 let g:mapleader = "\<Space>"
 let g:maplocalleader = ','
 
-
-set encoding=utf-8
-
 set title                   " show current buffername in title of terminal
-
 
 "############################## Finding Stuff ##############################"
 " VIM searches throu all sub-directories recursively for filenames
