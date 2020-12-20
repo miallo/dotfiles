@@ -1,5 +1,6 @@
 #
 # Colors
+# adapted from https://github.com/wincent/wincent/blob/99bf0d7/aspects/dotfiles/files/.zsh/colors
 #
 
 __WINCENT[BASE16_CONFIG]=~/.vim/.base16
@@ -81,8 +82,8 @@ color() {
         if [ -n "$BG" -a -n "$CC" ]; then
           command tmux set -a window-active-style "bg=#$BG"
           command tmux set -a window-style "bg=#$CC"
-          command tmux set -g pane-active-border-bg "#$CC"
-          command tmux set -g pane-border-bg "#$CC"
+          command tmux set -g pane-active-border-style "bg=#$CC"
+          command tmux set -g pane-border-style "bg=#$CC"
         fi
       fi
     else
@@ -103,17 +104,20 @@ color() {
   fi
   local ALL_SCHEMES=$(find "$BASE16_DIR" -name 'base16-*.sh' | \
       sed -E 's|.+/base16-||' | \
-      sed -E 's/\.sh//')
+      sed -E 's/\.sh//' | \
+      grep "${2:-.}" | \
+      sort
+      )
 
   case "$SCHEME" in
   help)
-    echo 'color [tomorrow-night|ocean|grayscale-light|...]'
-    echo
-    echo 'Available schemes:'
-    color ls
+    echo 'color                                   (show current scheme)'
+    echo 'color default-dark|grayscale-light|...  (switch to scheme)'
+    echo 'color help                              (show this help)'
+    echo 'color ls [pattern]                      (list available schemes)'
     echo
     echo 'Chose Random Scheme:'
-    echo 'color rand'
+    echo 'color rand [pattern]                    (chose a random scheme)'
     return
     ;;
   ls)
