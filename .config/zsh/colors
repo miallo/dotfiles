@@ -142,11 +142,12 @@ color() {
       column
       ;;
   rand)
-    __color $( printf $ALL_SCHEMES | \
+    local random_color=$( printf $ALL_SCHEMES | \
       shuf -n1)
     if [[ -z "$quiet" ]]; then
-      head -1 "$__WINCENT[BASE16_CONFIG]"
+        echo "$random_color"
     fi
+    __color "$random_color"
     ;;
   -)
     if [[ -s "$BASE16_CONFIG_PREVIOUS" ]]; then
