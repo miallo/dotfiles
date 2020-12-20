@@ -75,7 +75,9 @@ endif
 set updatecount=80                      " update swapfiles every 80 typed chars
 set updatetime=2000                     " CursorHold interval
 
-set shada=!,'100,<50,s10,h,%            " save variables, registers,... from last session
+if has('shada')
+    set shada=!,'100,<50,s10,h,%        " save variables, registers,... from last session
+endif
 set history=50                          " keep 50 lines of command line history
 set ruler                               " show the cursor position all the time
 if has('mksession')
