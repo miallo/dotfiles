@@ -102,10 +102,27 @@ color() {
       SCHEME=help
     fi
   fi
+
+  while [ "$#" -gt 0 ]; do
+      case "$2" in
+          "-q"|"--quiet")
+              local quiet=1
+              shift
+              ;;
+
+          "--not"|"-n")
+              local grep_not="-v"
+              shift
+              ;;
+          *)
+              break
+              ;;
+      esac
+  done
   local ALL_SCHEMES=$(find "$BASE16_DIR" -name 'base16-*.sh' | \
       sed -E 's|.+/base16-||' | \
       sed -E 's/\.sh//' | \
-      grep "${2:-.}" | \
+      grep $grep_not "${2:-.}" | \
       sort
       )
 
@@ -127,7 +144,10 @@ color() {
   rand)
     __color $( printf $ALL_SCHEMES | \
       shuf -n1)
-      ;;
+    if [[ -z "$quiet" ]]; then
+      head -1 "$__WINCENT[BASE16_CONFIG]"
+    fi
+    ;;
   -)
     if [[ -s "$BASE16_CONFIG_PREVIOUS" ]]; then
       local PREVIOUS_SCHEME=$(head -1 "$BASE16_CONFIG_PREVIOUS")
