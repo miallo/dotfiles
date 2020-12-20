@@ -124,7 +124,7 @@ function cdla () { cd $@; la }
 typeset -A __WINCENT
 
 fpath=($HOME/.config/zsh $fpath)
-source $HOME/.config/zsh/color
+source $HOME/.config/zsh/colors
 
 zstyle ':completion:*:*:vim:*' file-patterns '^*(.(png|aux|log|pdf|bbl|blg|out|toc|run.xml|synctex.gz)|-blx.bib):source-files' '*:all-files'
 zstyle ':completion:*:*:nvim:*' file-patterns '^*(.(png|aux|log|pdf|bbl|blg|out|toc|run.xml|synctex.gz)|-blx.bib):source-files' '*:all-files'
