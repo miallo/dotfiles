@@ -40,4 +40,6 @@ Plugin 'darfink/vim-plist'
 
 call vundle#end()
 
+let g:notermguicolors=1
+
 source ~/dotfiles/nixos/neovim/init.vim

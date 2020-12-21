@@ -390,7 +390,11 @@ function s:CheckColorScheme()
     if !has('termguicolors')
         let g:base16colorspace=256
     else
-        set termguicolors
+        if get(g:,"notermguicolors", 0)
+            set notermguicolors
+        else
+            set termguicolors
+        endif
     endif
 
     let s:config_file = expand('~/.vim/.base16')
