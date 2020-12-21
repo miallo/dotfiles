@@ -44,7 +44,46 @@ luma() {
 color() {
   emulate -L zsh
 
-  local SCHEME="$1"
+  local action=
+  if [ $# -eq 0 ]; then
+    action="show-current"
+  fi
+  while [ "$#" -gt 0 ]; do
+    case "$1" in
+      "-q"|"--quiet")
+        local quiet=1
+        shift
+        ;;
+      "--not"|"-n")
+        local grep_not="-v"
+        local SCHEME="$2"
+        shift
+        shift
+        if [ -z "$action" ]; then
+          action="rand"
+        fi
+        break
+        ;;
+      "help"|"set"|"ls"|"show-current"|"rand"|"-")
+        if [ -z "$action" ]; then
+          action="$1"
+          shift
+        else
+          local SCHEME="$1"
+          shift
+          break
+        fi
+        ;;
+      *)
+        if [ -z "$action" ]; then
+          action="set"
+        fi
+        local SCHEME="$1"
+        shift
+        break
+        ;;
+    esac
+  done
   local BASE16_DIR=~/.config/zsh/base16-shell/scripts
   local I3BASE_DIR=~/.config/i3
   local BASE16_I3_DIR="$I3BASE_DIR/base16-i3/colors"
@@ -92,44 +131,18 @@ color() {
     fi
   }
 
-  if [ $# -eq 0 ]; then
-    if [ -s "$__WINCENT[BASE16_CONFIG]" ]; then
-      cat "$__WINCENT[BASE16_CONFIG]"
-      local SCHEME=$(head -1 "$__WINCENT[BASE16_CONFIG]")
-      __color "$SCHEME"
-      return
-    else
-      SCHEME=help
-    fi
-  fi
 
-  while [ "$#" -gt 0 ]; do
-      case "$2" in
-          "-q"|"--quiet")
-              local quiet=1
-              shift
-              ;;
-
-          "--not"|"-n")
-              local grep_not="-v"
-              shift
-              ;;
-          *)
-              break
-              ;;
-      esac
-  done
   local ALL_SCHEMES=($(find "$BASE16_DIR" -name 'base16-*.sh' | \
       sed -E 's|.+/base16-||' | \
       sed -E 's/\.sh//' | \
-      grep $grep_not "${2:-.}" | \
+      grep $grep_not "${SCHEME:-.}" | \
       sort
       ))
 
-  case "$SCHEME" in
+  case "$action" in
   help)
-    echo 'color                                          (show current scheme)'
-    echo 'color default-dark|grayscale-light|...         (switch to scheme)'
+    echo 'color [show-current]                           (show current scheme)'
+    echo 'color [set] default-dark|grayscale-light|...   (switch to scheme)'
     echo 'color help                                     (show this help)'
     echo 'color ls [-n/--not] [pattern]                  (list available schemes)'
     echo
@@ -144,7 +157,7 @@ color() {
   rand)
     local random_color=${ALL_SCHEMES[$(( $RANDOM % ${#ALL_SCHEMES[@]} + 1 ))]}
     if [[ -z "$quiet" ]]; then
-        echo "$random_color"
+      echo "$random_color"
     fi
     __color "$random_color"
     ;;
@@ -157,9 +170,22 @@ color() {
       STATUS=1
     fi
     ;;
-  *)
+  "show-current")
+    if [ -s "$__WINCENT[BASE16_CONFIG]" ]; then
+      cat "$__WINCENT[BASE16_CONFIG]"
+      local SCHEME=$(head -1 "$__WINCENT[BASE16_CONFIG]")
+      __color "$SCHEME"
+      return
+    else
+      color "help"
+    fi
+    ;;
+  "set")
     __color "$SCHEME"
     ;;
+*)
+    echo "Thou should not have gotten here..."
+    echo "Unknown action '$action'"
   esac
 
   unfunction __color
