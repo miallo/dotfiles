@@ -119,12 +119,12 @@ color() {
               ;;
       esac
   done
-  local ALL_SCHEMES=$(find "$BASE16_DIR" -name 'base16-*.sh' | \
+  local ALL_SCHEMES=($(find "$BASE16_DIR" -name 'base16-*.sh' | \
       sed -E 's|.+/base16-||' | \
       sed -E 's/\.sh//' | \
       grep $grep_not "${2:-.}" | \
       sort
-      )
+      ))
 
   case "$SCHEME" in
   help)
@@ -138,12 +138,11 @@ color() {
     return
     ;;
   ls)
-    printf $ALL_SCHEMES | \
+    printf '%s\n' "${ALL_SCHEMES[@]}" | \
       column
       ;;
   rand)
-    local random_color=$( printf $ALL_SCHEMES | \
-      shuf -n1)
+    local random_color=${ALL_SCHEMES[$(( $RANDOM % ${#ALL_SCHEMES[@]} + 1 ))]}
     if [[ -z "$quiet" ]]; then
         echo "$random_color"
     fi
