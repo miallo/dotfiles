@@ -16,27 +16,27 @@ Plugin 'VundleVim/Vundle.vim'
 "Plugin 'ctrlpvim/ctrlp.vim'
 "Plugin 'ehamberg/vim-cute-python'
 Plugin 'vim-latex/vim-latex'
-Plugin 'wincent/loupe'
-Plugin 'wincent/terminus'
-Plugin 'farmergreg/vim-lastplace'
-Plugin 'LnL7/vim-nix'
-Plugin 'tpope/vim-fugitive'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tpope/vim-eunuch'
-Plugin 'tpope/vim-surround'
-Plugin 'junegunn/fzf.vim'
-Plugin 'ap/vim-css-color'
+Plugin 'wincent/loupe'              " nice search
+Plugin 'wincent/terminus'           " terminal setup
+Plugin 'farmergreg/vim-lastplace'   " open last buffers
+Plugin 'LnL7/vim-nix'               " nix syntax
+Plugin 'tpope/vim-fugitive'         " git integration
+Plugin 'airblade/vim-gitgutter'     " git marks in buffers
+Plugin 'tpope/vim-eunuch'           " commandline tools
+Plugin 'tpope/vim-surround'         " surround text-objects with quotes/parantheses
+Plugin 'junegunn/fzf.vim'           " fuzzy file finder
+Plugin 'ap/vim-css-color'           " show hex colours
 "Plugin 'pangloss/vim-javascript' # disabled in favour of vim-jsx-improve
-Plugin 'chemzqm/vim-jsx-improve'
-Plugin 'vim-test/vim-test'
-Plugin 'liuchengxu/vim-which-key'
-Plugin 'Yggdroot/indentLine'
-Plugin 'dense-analysis/ale'
+Plugin 'chemzqm/vim-jsx-improve'    " javascript syntax
+Plugin 'vim-test/vim-test'          " integrate test suits
+Plugin 'liuchengxu/vim-which-key'   " show which <leader>-maps are mapped
+Plugin 'Yggdroot/indentLine'        " show indentation levels
+Plugin 'dense-analysis/ale'         " linter and language server
 "Plugin 'Shougo/deoplete.nvim'
-Plugin 'tpope/vim-commentary'
-Plugin 'vimwiki/vimwiki'
-Plugin 'chriskempson/base16-vim'
-Plugin 'darfink/vim-plist'
+Plugin 'tpope/vim-commentary'       " (un)comment lines
+Plugin 'vimwiki/vimwiki'            " connected markdown files
+Plugin 'chriskempson/base16-vim'    " color maps
+Plugin 'darfink/vim-plist'          " (binary) plist support
 
 call vundle#end()
 
