@@ -13,3 +13,6 @@
 [submodule ".vim/UltiSnips"]
 	path = .vim/UltiSnips
 	url = git:github.com:miallo/ultisnips-snippets.git
+[submodule "nixos"]
+	path = nixos
+	url = git@github.com:miallo/nixos-config.git
