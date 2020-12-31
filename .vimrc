@@ -1,8 +1,9 @@
 set nocompatible
 
+let s:path = expand('~/dotfiles')
 set shell=/bin/bash
 
-set rtp+=~/.vim/bundle/Vundle.vim
+exec "set rtp+=" . s:path . "/.vim/bundle/Vundle.vim"
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
@@ -42,4 +43,4 @@ call vundle#end()
 
 let g:notermguicolors=1
 
-source ~/dotfiles/nixos/neovim/init.vim
+exec "source " . s:path . "/nixos/neovim/init.vim"
