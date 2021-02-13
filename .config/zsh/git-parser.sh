@@ -20,11 +20,6 @@ autoload -U colors && colors
 : "${ZSH_THEME_GIT_PROMPT_CLEAN:="%{$fg_bold[green]%}%{✔%G%}"}"
 
 get_tagname_or_hash() {
-    # get hash
-    hash_=$(git rev-parse --short HEAD 2> /dev/null)
-    hash_="${hash_# +}"
-    hash_="${hash_% +}"
-
     # get tagname
     tags=($(git for-each-ref --points-at=HEAD --count=2 --sort=-version:refname --format='%(refname:short)' refs/tags))
 
@@ -35,7 +30,10 @@ get_tagname_or_hash() {
             echo "${tags[0]}"
         fi
     else
-        echo "$hash_"
+        # get hash
+        hash_=$(git rev-parse --short HEAD 2> /dev/null)
+        hash_="${hash_# +}" # trim
+        echo "${hash_% +}"
     fi
 }
 
