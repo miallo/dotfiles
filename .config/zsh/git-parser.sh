@@ -40,7 +40,6 @@ get_tagname_or_hash() {
 }
 
 parse_git() {
-    git_status="$(git status --porcelain --branch 2> /dev/null)"
     GIT_ADDED=0
     GIT_AHEAD=0
     GIT_BEHIND=0
@@ -161,7 +160,6 @@ git_super_status() {
     STATUS="$STATUS%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
     echo "$STATUS"
 }
-
 
 git_status="$(git status --porcelain --branch 2> /dev/null)"
 
