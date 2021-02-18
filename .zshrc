@@ -132,3 +132,9 @@ zstyle ':completion:*:*:nvim:*' file-patterns '^*(.(png|aux|log|pdf|bbl|blg|out|
 if command -v thefuck &> /dev/null; then
     eval $(thefuck --alias)
 fi
+
+# Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+# End Nix
