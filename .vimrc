@@ -11,33 +11,39 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-"Plugin 'thoughtstream/Damian-Conway-s-Vim-Setup'
-" Auto-Completion
-"Plugin 'Valloric/YouCompleteMe'
-"Plugin 'ctrlpvim/ctrlp.vim'
-"Plugin 'ehamberg/vim-cute-python'
-Plugin 'vim-latex/vim-latex'
-Plugin 'wincent/loupe'              " nice search
-Plugin 'wincent/terminus'           " terminal setup
-Plugin 'farmergreg/vim-lastplace'   " open last buffers
+
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'ctrlpvim/ctrlp.vim'
+" Plugin 'ehamberg/vim-cute-python'
+" Plugin 'shougo/deoplete.nvim'
+" Plugin 'thoughtstream/Damian-Conway-s-Vim-Setup'
 Plugin 'LnL7/vim-nix'               " nix syntax
-Plugin 'tpope/vim-fugitive'         " git integration
-Plugin 'airblade/vim-gitgutter'     " git marks in buffers
-Plugin 'tpope/vim-eunuch'           " commandline tools
-Plugin 'tpope/vim-surround'         " surround text-objects with quotes/parantheses
-Plugin 'junegunn/fzf.vim'           " fuzzy file finder
-Plugin 'ap/vim-css-color'           " show hex colours
-"Plugin 'pangloss/vim-javascript' # disabled in favour of vim-jsx-improve
-Plugin 'chemzqm/vim-jsx-improve'    " javascript syntax
-Plugin 'vim-test/vim-test'          " integrate test suits
-Plugin 'liuchengxu/vim-which-key'   " show which <leader>-maps are mapped
+Plugin 'SirVer/ultisnips'
 Plugin 'Yggdroot/indentLine'        " show indentation levels
-Plugin 'dense-analysis/ale'         " linter and language server
-"Plugin 'Shougo/deoplete.nvim'
-Plugin 'tpope/vim-commentary'       " (un)comment lines
-Plugin 'vimwiki/vimwiki'            " connected markdown files
+Plugin 'airblade/vim-gitgutter'     " git marks in buffers
+Plugin 'airblade/vim-rooter'        " set root of vim to project folder
+Plugin 'ap/vim-css-color'           " show hex colours
+Plugin 'chemzqm/vim-jsx-improve'    " javascript syntax
 Plugin 'chriskempson/base16-vim'    " color maps
 Plugin 'darfink/vim-plist'          " (binary) plist support
+Plugin 'dense-analysis/ale'         " linter and language server
+Plugin 'editorconfig/editorconfig-vim'
+Plugin 'farmergreg/vim-lastplace'   " open last buffers
+Plugin 'junegunn/fzf.vim'           " fuzzy file finder
+Plugin 'liuchengxu/vim-which-key'   " show which <leader>-maps are mapped
+Plugin 'miallo/loupe'               " nice search
+Plugin 'pangloss/vim-javascript'
+Plugin 'tpope/vim-commentary'       " (un)comment lines
+Plugin 'tpope/vim-eunuch'           " commandline tools
+Plugin 'tpope/vim-fugitive'         " git integration
+Plugin 'tpope/vim-rsi'              " some emacs keybindings
+Plugin 'tpope/vim-surround'         " surround text-objects with quotes/parantheses
+Plugin 'vim-latex/vim-latex'
+Plugin 'vim-scripts/matchit.zip'
+Plugin 'vim-test/vim-test'          " integrate test suits
+Plugin 'vimwiki/vimwiki'            " connected markdown files
+Plugin 'wincent/command-t'          " fuzzy file finder
+Plugin 'wincent/terminus'           " terminal setup
 
 call vundle#end()
 
