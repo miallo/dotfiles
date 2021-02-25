@@ -44,20 +44,21 @@ luma() {
 color() {
   emulate -L zsh
 
-  local action=
+  zparseopts -D -E -- q=quiet -quiet=quiet
+
+  local action
+  local SCHEME
   if [ $# -eq 0 ]; then
     action="show-current"
   fi
+  # zparseopts -D -E -- n=grep_not -not=grep_not
   while [ "$#" -gt 0 ]; do
-    case "$1" in
-      "-q"|"--quiet")
-        local quiet=1
-        shift
-        ;;
+    i=$1
+    shift
+    case "$i" in
       "--not"|"-n")
         local grep_not="-v"
-        local SCHEME="$2"
-        shift
+        local SCHEME="$1"
         shift
         if [ -z "$action" ]; then
           action="rand"
@@ -66,11 +67,9 @@ color() {
         ;;
       "help"|"set"|"ls"|"show-current"|"rand"|"-")
         if [ -z "$action" ]; then
-          action="$1"
-          shift
+          action="$i"
         else
-          local SCHEME="$1"
-          shift
+          local SCHEME="$i"
           break
         fi
         ;;
@@ -78,8 +77,7 @@ color() {
         if [ -z "$action" ]; then
           action="set"
         fi
-        local SCHEME="$1"
-        shift
+        local SCHEME="$i"
         break
         ;;
     esac
@@ -145,8 +143,6 @@ color() {
     echo 'color [set] default-dark|grayscale-light|...   (switch to scheme)'
     echo 'color help                                     (show this help)'
     echo 'color ls [-n/--not] [pattern]                  (list available schemes)'
-    echo
-    echo 'Chose Random Scheme:'
     echo 'color rand [-q/--quiet] [[-n/--not] pattern]   (chose a random scheme)'
     return
     ;;
@@ -156,7 +152,7 @@ color() {
       ;;
   rand)
     local random_color=${ALL_SCHEMES[$(( $RANDOM % ${#ALL_SCHEMES[@]} + 1 ))]}
-    if [[ -z "$quiet" ]]; then
+    if [[ ${#quiet} -eq 0 ]]; then
       echo "$random_color"
     fi
     __color "$random_color"
