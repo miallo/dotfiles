@@ -21,6 +21,7 @@ font pango:System San Francisco Display 11
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
+# #--- Workspaces ---#
 set $WORK1 "1: Internet"
 set $WORK2 "2: >_"
 set $WORK3 "3"
@@ -32,6 +33,10 @@ set $WORK7 "7"
 set $WORK8 "8"
 set $WORK9 "9: E-Mail"
 set $WORK10 "10: Messenger"
+
+
+
+
 # start a terminal
 #bindsym $mod+Return		exec alacritty #i3-sensible-terminal
 bindsym $mod+Return exec --no-startup-id alacritty
@@ -72,11 +77,8 @@ bindsym $mod+Shift+Down		move down
 bindsym $mod+Shift+Up		move up
 bindsym $mod+Shift+Right	move right
 
-# split in horizontal orientation
-bindsym $mod+c				split h
-
-# split in vertical orientation
-bindsym $mod+v				split v
+# split in vertical/horizontal orientation
+bindsym $mod+t				split toggle
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f				fullscreen toggle
