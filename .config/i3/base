@@ -2,6 +2,7 @@
 set $mod Mod1
 
 set $editor vim
+set $term --no-startup-id alacritty
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -138,8 +139,8 @@ bindsym $mod+Shift+8 move container to workspace $WORK8
 bindsym $mod+Shift+9 move container to workspace $WORK9
 bindsym $mod+Shift+0 move container to workspace $WORK10
 
-assign [class="^Firefox$"]				$WORK1
-assign [class="^Chromium-browser$"]		$WORK1
+# assign [class="^Firefox$"]				$WORK1
+# assign [class="^Chromium-browser$"]		$WORK1
 assign [class="^Nautilus$"]				$WORK4
 assign [class="^Pcmanfm$"]				$WORK4
 assign [class="^Daily"]					$WORK9
