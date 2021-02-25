@@ -112,7 +112,7 @@ export EDITOR='nvim'
 setopt prompt_subst
 
 #PS1='%n $(shrink_path -f) $(git_super_status)> '
-PS1='$(shrink_path -f) $($HOME/.config/zsh/git-parser.sh)> '
+PS1='$(shrink_path -f) $($HOME/.config/zsh/git-parser.sh)%(?..%F{red})%(!.#.>)%f '
 
 
 # cd does not automatically push to pushd/popd/dirs stack
