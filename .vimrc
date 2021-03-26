@@ -42,7 +42,10 @@ Plugin 'vim-latex/vim-latex'
 Plugin 'vim-scripts/matchit.zip'
 Plugin 'vim-test/vim-test'          " integrate test suits
 Plugin 'vimwiki/vimwiki'            " connected markdown files
-Plugin 'wincent/command-t'          " fuzzy file finder
+" Plugin 'wincent/command-t'          " fuzzy file finder
+Plugin 'nvim-lua/popup.nvim'
+Plugin 'nvim-lua/plenary.nvim'
+Plugin 'nvim-telescope/telescope.nvim'
 Plugin 'wincent/terminus'           " terminal setup
 
 call vundle#end()
