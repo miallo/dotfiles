@@ -3,5 +3,6 @@
 .vim/.base16
 .vim/.base16.previous
 .vim/bundle
+.vim/init.vim
 *.vim/tmp
 .config/google-chrome/
