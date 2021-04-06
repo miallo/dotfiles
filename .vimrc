@@ -30,6 +30,7 @@ Plugin 'dense-analysis/ale'         " linter and language server
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'farmergreg/vim-lastplace'   " open last buffers
 Plugin 'junegunn/fzf.vim'           " fuzzy file finder
+Plugin 'junegunn/fzf'               " fuzzy file finder addition
 Plugin 'liuchengxu/vim-which-key'   " show which <leader>-maps are mapped
 Plugin 'miallo/loupe'               " nice search
 Plugin 'pangloss/vim-javascript'
