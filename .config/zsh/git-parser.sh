@@ -98,7 +98,7 @@ parse_git() {
                 ;;
             ?"M"*)
                 ((GIT_MODIFIED++))
-                ;;
+                ;|
             ?"D"*)
                 ((GIT_DELETED++))
                 ;;
@@ -111,9 +111,7 @@ parse_git() {
             "A"?*)
                 ((GIT_ADDED++))
                 ;;
-            " "*)
-                ;;
-            *)
+            [MD]*)
                 ((GIT_STAGED++))
                 ;;
         esac
