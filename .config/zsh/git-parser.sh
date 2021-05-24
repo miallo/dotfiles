@@ -41,7 +41,7 @@ parse_git() {
     GIT_ADDED=0
     GIT_AHEAD=0
     GIT_BEHIND=0
-    GIT_CHANGED=0
+    GIT_MODIFIED=0
     GIT_CONFLICTS=0
     GIT_DELETED=0
     GIT_RENAMED_OR_COPIED=0
@@ -97,7 +97,7 @@ parse_git() {
                 ((GIT_UNTRACKED++))
                 ;;
             ?"M"*)
-                ((GIT_CHANGED++))
+                ((GIT_MODIFIED++))
                 ;;
             ?"D"*)
                 ((GIT_DELETED++))
@@ -143,8 +143,8 @@ git_super_status() {
     if [ "$GIT_DELETED" -ne "0" ]; then
         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_DELETED$GIT_DELETED%{${reset_color}%}"
     fi
-    if [ "$GIT_CHANGED" -ne "0" ]; then
-        STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CHANGED$GIT_CHANGED%{${reset_color}%}"
+    if [ "$GIT_MODIFIED" -ne "0" ]; then
+        STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CHANGED$GIT_MODIFIED%{${reset_color}%}"
     fi
     if [ "$GIT_ADDED" -ne "0" ]; then
         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_ADDED$GIT_ADDED%{${reset_color}%}"
@@ -152,7 +152,7 @@ git_super_status() {
     if [ "$GIT_UNTRACKED" -ne "0" ]; then
         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED$GIT_UNTRACKED%{${reset_color}%}"
     fi
-    if [ "$GIT_ADDED" -eq "0" ] && [ "$GIT_CHANGED" -eq "0" ] && [ "$GIT_CONFLICTS" -eq "0" ] && [ "$GIT_DELETED" -eq "0" ] && [ "$GIT_RENAMED_OR_COPIED" -eq "0" ] && [ "$GIT_STAGED" -eq "0" ]; then
+    if [ "$GIT_ADDED" -eq "0" ] && [ "$GIT_MODIFIED" -eq "0" ] && [ "$GIT_CONFLICTS" -eq "0" ] && [ "$GIT_DELETED" -eq "0" ] && [ "$GIT_RENAMED_OR_COPIED" -eq "0" ] && [ "$GIT_STAGED" -eq "0" ]; then
         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
     fi
     STATUS="$STATUS%{${reset_color}%}$ZSH_THEME_GIT_PROMPT_SUFFIX"
