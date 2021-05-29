@@ -103,6 +103,7 @@ bindsym $mod+a				focus parent
 
 # Moving workspaces between screens
 bindsym $mod+p				move workspace to output right
+bindsym $mod+Shift+p		move workspace to output left
 
 # switch workspaces
 bindsym $mod+Shift+s		exec ~/.config/i3/switch_workspaces_on_monitors.sh
