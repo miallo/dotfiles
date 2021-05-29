@@ -17,6 +17,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'ehamberg/vim-cute-python'
 " Plugin 'shougo/deoplete.nvim'
 " Plugin 'thoughtstream/Damian-Conway-s-Vim-Setup'
+Plugin 'neovim/nvim-lspconfig'      " configure lsp server for autocompletion, ...
 Plugin 'LnL7/vim-nix'               " nix syntax
 Plugin 'SirVer/ultisnips'
 Plugin 'Yggdroot/indentLine'        " show indentation levels
@@ -27,6 +28,7 @@ Plugin 'chemzqm/vim-jsx-improve'    " javascript syntax
 Plugin 'chriskempson/base16-vim'    " color maps
 Plugin 'darfink/vim-plist'          " (binary) plist support
 Plugin 'dense-analysis/ale'         " linter and language server
+Plugin 'hrsh7th/nvim-compe'         " autocompletion
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'farmergreg/vim-lastplace'   " open last buffers
 Plugin 'junegunn/fzf.vim'           " fuzzy file finder
