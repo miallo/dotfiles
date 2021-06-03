@@ -27,7 +27,8 @@ Plugin 'ap/vim-css-color'           " show hex colours
 Plugin 'chemzqm/vim-jsx-improve'    " javascript syntax
 Plugin 'chriskempson/base16-vim'    " color maps
 Plugin 'darfink/vim-plist'          " (binary) plist support
-Plugin 'dense-analysis/ale'         " linter and language server
+" Plugin 'dense-analysis/ale'         " linter and language server
+Plugin 'mhartington/formatter.nvim' " autoformatting
 Plugin 'hrsh7th/nvim-compe'         " autocompletion
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'farmergreg/vim-lastplace'   " open last buffers
