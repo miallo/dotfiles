@@ -57,4 +57,5 @@ call vundle#end()
 let g:notermguicolors=1
 
 exec "source " . s:path . "/nixos/neovim/init.vim"
-nnoremap <leader>t :Files<CR>
+exec "luafile " . s:path . "/nixos/neovim/completion.lua"
+" nnoremap <leader>t :Files<CR>
