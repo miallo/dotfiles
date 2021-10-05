@@ -1,7 +1,7 @@
 alias ll='ls -lFGh'
 alias lla='ls -lFGhA'
 alias la='ls -AFG'
-alias ls='ls -FG'
+alias ls='ls -FG --color'
 alias sl='ls'
 alias anzeigen='defaults write com.apple.finder AppleShowAllFiles 1 && killall Finder'
 alias ausblenden='defaults write com.apple.finder AppleShowAllFiles 0 && killall Finder'
