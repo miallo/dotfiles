@@ -40,6 +40,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'tpope/vim-commentary'       " (un)comment lines
 Plugin 'tpope/vim-eunuch'           " commandline tools
 Plugin 'tpope/vim-fugitive'         " git integration
+Plugin 'kdheepak/lazygit.nvim'      " git integration
 Plugin 'tpope/vim-rsi'              " some emacs keybindings
 Plugin 'tpope/vim-surround'         " surround text-objects with quotes/parantheses
 Plugin 'vim-latex/vim-latex'
