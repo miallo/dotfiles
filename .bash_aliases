@@ -20,6 +20,7 @@ alias sshpigeist='ssh pi@10.10.182.103'
 alias sshpiheist='ssh pi@192.168.1.5'
 which nvim > /dev/null && alias vim='nvim'
 alias cds='cd ~/src/Salus/citizen-app/ && ANDROID_HOME="$HOME/Android/Sdk" nix-shell --run zsh'
+alias gdu='git diff @{u}'
 
 nix-git-sha() {
     nix-prefetch-url --unpack https://github.com/"$1"/archive/"${2=master}".tar.gz
