@@ -62,7 +62,7 @@ DISABLE_UPDATE_PROMPT="true"
 # Add wisely, as too many plugins slow down shell startup.
 # globalias
 plugins=(
-  shrink-path zsh-autosuggestions python node zsh-syntax-highlighting
+  shrink-path zsh-autosuggestions zsh-syntax-highlighting
 )
 
 source $ZSH/oh-my-zsh.sh
