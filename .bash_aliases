@@ -9,6 +9,7 @@ alias ausblenden='defaults write com.apple.finder AppleShowAllFiles 0 && killall
 alias up='nmcli connection up bevuta-vpn'
 alias down='nmcli connection down bevuta-vpn'
 
+alias python=python3
 
 # alias pixelextend='rm -rf ~/Library/Containers/com.pixelmatorteam.pixelmator.x.trial/'
 # alias sshcip='ssh -Y  m.lohmann@login.cip.physik.uni-goettingen.de'
