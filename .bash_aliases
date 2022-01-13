@@ -30,7 +30,15 @@ alias gcp='git cherry-pick'
 alias gcpa='git cherry-pick --abort'
 alias gcpc='git cherry-pick --continue'
 alias gcps='git cherry-pick --skip'
-alias gd='git diff'
+
+gd() {
+    if [[ $# = 1 ]] && [[ $1 = *'..'* ]]; then # if only one parameter and that contains at least two dots
+        git diff "${1%%.*}" "${1##*.}" # split up at the dots
+    else
+        git diff "$@" # just pass all parameters to diff
+    fi
+}
+
 alias gds='git diff --staged'
 alias gdu='git diff @{u}'
 alias gf='git fetch'
@@ -40,11 +48,13 @@ alias grb='git rebase'
 alias grba='git rebase --abort'
 alias grbc='git rebase --continue'
 alias grbs='git rebase --skip'
+
 grd() {
-    leftrev="${1=HEAD}"
-    rightrev="${2=@{u\}}"
-    git range-diff $(git merge-base "$leftrev" "$rightrev") "$leftrev" "$rightrev"
+    leftrev="${1=@{u\}}" # default first argument to the upstream branch
+    rightrev="${2=@}" # default second argument to HEAD
+    git range-diff "$(git merge-base "$leftrev" "$rightrev")" "$leftrev" "$rightrev"
 }
+
 alias grhh='git reset --hard'
 alias grhs='git reset'
 alias grm='git rm'
