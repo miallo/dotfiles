@@ -11,10 +11,8 @@ alias down='nmcli connection down bevuta-vpn'
 
 alias python=python3
 
-# alias pixelextend='rm -rf ~/Library/Containers/com.pixelmatorteam.pixelmator.x.trial/'
 # alias sshcip='ssh -Y  m.lohmann@login.cip.physik.uni-goettingen.de'
 alias finalcutextend='rm ~/Library/Application\ Support/.ffuserdata'
-alias pixelextend='rm -rf ~/Library/Group\ Containers/4R6749AYRE.com.pixelmator/'
 alias sshcip='ssh -X -J m.lohmann@login.cip.physik.uni-goettingen.de c079'
 alias sshpiethernet='ssh pi@192.168.2.2'
 alias sshpigeist='ssh pi@10.10.182.103'
