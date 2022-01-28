@@ -135,6 +135,6 @@ if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
 fi
 # End Nix
 
-eval "$(direnv hook zsh)"
+command -v direnv && eval "$(direnv hook zsh)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || :
