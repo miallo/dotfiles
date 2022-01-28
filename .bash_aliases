@@ -43,7 +43,7 @@ alias grbs='git rebase --skip'
 grd() {
     leftrev="${1=HEAD}"
     rightrev="${2=@{u\}}"
-    echo git range-diff $(git merge-base "$leftrev" "$rightrev") "$leftrev" "$rightrev"
+    git range-diff $(git merge-base "$leftrev" "$rightrev") "$leftrev" "$rightrev"
 }
 alias grhh='git reset --hard'
 alias grhs='git reset'
