@@ -30,3 +30,5 @@
 	defaultBranch = main
 [advice]
 	skippedCherryPicks = false
+[remote "origin"]
+	prune = true
