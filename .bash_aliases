@@ -1,3 +1,6 @@
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
 alias ll='ls -lFGh'
 alias lla='ls -lFGhA'
 alias la='ls -AFG'
