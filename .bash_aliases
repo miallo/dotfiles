@@ -32,7 +32,7 @@ alias gcpc='git cherry-pick --continue'
 alias gcps='git cherry-pick --skip'
 
 gd() {
-    if [[ $# = 1 ]] && [[ $1 = *'..'* ]]; then # if only one parameter and that contains at least two dots
+    if [[ $# = 1 ]] && [[ $1 = *'...'* ]]; then # if only one parameter and that contains at least three dots
         git diff "${1%%.*}" "${1##*.}" # split up at the dots
     else
         git diff "$@" # just pass all parameters to diff
