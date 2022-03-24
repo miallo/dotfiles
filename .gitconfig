@@ -1,6 +1,7 @@
 [user]
 	email = michael.lohmann@bevuta.com
 	name = Michael Lohmann
+	useConfigOnly = true
 [branch]
 	autosetuprebase = always
 [pull]
@@ -20,6 +21,8 @@
 	stsh = stash --keep-index
 	staash = stash --include-untracked
 	staaash = stash --all
+	bevuta = config user.email michael.lohmann@bevuta.com
+	private = config user.email mi.al.lohmann@gmail.com
 [rerere]
 	enabled = true
 [init]
