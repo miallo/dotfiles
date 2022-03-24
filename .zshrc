@@ -62,12 +62,13 @@ DISABLE_UPDATE_PROMPT="true"
 # Add wisely, as too many plugins slow down shell startup.
 # globalias
 plugins=(
-  shrink-path zsh-autosuggestions zsh-syntax-highlighting
+  shrink-path zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
 source ~/.bash_aliases
 source ~/.config/zsh/zsh_aliases
+source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
 
