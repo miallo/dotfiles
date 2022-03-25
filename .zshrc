@@ -1,6 +1,7 @@
 ZSH_DISABLE_COMPFIX=true
 
 source ~/.config/zsh/bindkeys.sh
+source ~/.config/zsh/completion.sh
 source ~/.bash_aliases
 source ~/.config/zsh/zsh_aliases
 source ~/.config/zsh/shrink_path.sh
