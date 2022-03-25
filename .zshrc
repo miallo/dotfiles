@@ -1,5 +1,6 @@
 ZSH_DISABLE_COMPFIX=true
 
+source ~/.config/zsh/history.sh
 source ~/.config/zsh/bindkeys.sh
 source ~/.config/zsh/completion.sh
 source ~/.bash_aliases
