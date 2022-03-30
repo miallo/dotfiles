@@ -6,6 +6,7 @@
 	autosetuprebase = always
 [pull]
 	rebase = true
+	ff = only
 
 [alias]
 	co = checkout
