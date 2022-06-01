@@ -33,3 +33,5 @@
 	skippedCherryPicks = false
 [remote "origin"]
 	prune = true
+[safe]
+	directory = /etc/nixos
