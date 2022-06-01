@@ -51,3 +51,5 @@ fi
 command -v direnv >& /dev/null && eval "$(direnv hook zsh)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || :
+
+autoload -Uz compinit && compinit
