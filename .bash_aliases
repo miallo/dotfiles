@@ -18,10 +18,6 @@ alias python=python3
 
 # alias sshcip='ssh -Y  m.lohmann@login.cip.physik.uni-goettingen.de'
 alias finalcutextend='rm ~/Library/Application\ Support/.ffuserdata'
-alias sshcip='ssh -X -J m.lohmann@login.cip.physik.uni-goettingen.de c079'
-alias sshpiethernet='ssh pi@192.168.2.2'
-alias sshpigeist='ssh pi@10.10.182.103'
-alias sshpiheist='ssh pi@192.168.1.5'
 which nvim > /dev/null && alias vim='nvim'
 alias cds='cd ~/src/Salus/citizen-app/ && ANDROID_HOME="$HOME/Android/Sdk" nix-shell --run zsh'
 alias cdp='cd ~/src/Salus/psap-app/'
