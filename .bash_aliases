@@ -1,3 +1,5 @@
+autoload -U +X compinit && compinit
+
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -43,6 +45,7 @@ gd() {
         git diff "$@" # just pass all parameters to diff
     fi
 }
+compdef '_dispatch _git-diff git' gd
 
 alias gds='git diff --staged'
 alias gdu='git diff @{u}'
