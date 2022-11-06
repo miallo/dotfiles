@@ -19,7 +19,7 @@ alias python=python3
 # alias sshcip='ssh -Y  m.lohmann@login.cip.physik.uni-goettingen.de'
 alias finalcutextend='rm ~/Library/Application\ Support/.ffuserdata'
 which nvim > /dev/null && alias vim='nvim'
-alias cds='cd ~/src/Salus/citizen-app/ && ANDROID_HOME="$HOME/Android/Sdk" nix-shell --run zsh'
+alias cds='cd ~/src/Salus/citizen-app/'
 alias cdp='cd ~/src/Salus/psap-app/'
 alias cdl='cd ~/src/Salus/sms-location-app'
 
