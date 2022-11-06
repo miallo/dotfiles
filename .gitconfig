@@ -35,3 +35,5 @@
 	prune = true
 [safe]
 	directory = /etc/nixos
+[submodule]
+	recurse = true
