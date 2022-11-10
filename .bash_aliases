@@ -79,3 +79,8 @@ nix-git-sha() {
 nsp() {
     nix-shell -p "$1" --run "$1"
 }
+
+
+# Android emulator
+alias tbe='adb shell settings put secure enabled_accessibility_services com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService'
+alias tbd='adb shell settings put secure enabled_accessibility_services com.android.talkback/com.google.android.marvin.talkback.TalkBackService'
