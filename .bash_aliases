@@ -22,6 +22,7 @@ which nvim > /dev/null && alias vim='nvim'
 alias cds='cd ~/src/Salus/citizen-app/'
 alias cdp='cd ~/src/Salus/psap-app/'
 alias cdl='cd ~/src/Salus/sms-location-app'
+alias cdw='cd ~/src/website'
 
 
 # git
