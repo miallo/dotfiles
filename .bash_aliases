@@ -45,7 +45,7 @@ compdef '_dispatch _git-diff git' gd
 
 alias gds='git diff --staged'
 alias gdu='git diff @{u}'
-alias gf='git fetch'
+alias gf='git fetch --no-recurse-submodules'
 alias glg='git log --stat'
 alias gpsup='git push --set-upstream origin HEAD'
 alias grb='git rebase'
