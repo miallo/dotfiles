@@ -81,6 +81,7 @@ nsp() {
     nix-shell -p "$1" --run "$1"
 }
 
+alias nix-update-mac="sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs.nix && launchctl remove org.nixos.nix-daemon && launchctl load /Library/LaunchDaemons/org.nixos.nix-daemon.plist'"
 
 # Android emulator
 alias tbe='adb shell settings put secure enabled_accessibility_services com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService'
