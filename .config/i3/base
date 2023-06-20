@@ -42,7 +42,7 @@ set $WORK10 "10: Messenger"
 #bindsym $mod+Return		exec alacritty #i3-sensible-terminal
 bindsym $mod+Return exec --no-startup-id alacritty
 # bindsym $mod+Return	exec xterm -fa 'Monospace' -fs 10
-bindsym $mod+c exec --no-startup-id chromium --user-data-dir=/tmp/temp-chromium-profile --disable-web-security
+bindsym $mod+c exec --no-startup-id ungoogled-chromium --user-data-dir=/tmp/temp-chromium-profile --disable-web-security
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -302,7 +302,7 @@ exec --no-startup-id xsetroot -solid "#333333"
 
 # exec if xrandr | grep -q 'HDMI1 connected'; then xrandr --output HDMI1 --primary --auto --right-of DP2; else xrandr --output HDMI2 --primary --auto --right-of DP1; fi
 #exec --no-startup-id i3-msg "workspace $WORK4; exec nautilus"
-exec --no-startup-id i3-msg "workspace $WORK1; exec chromium;"
+exec --no-startup-id i3-msg "workspace $WORK1; exec ungoogled-chromium;"
 #exec --no-startup-id i3-msg "workspace $WORK1; exec firefox;"
 # exec --no-startup-id i3-msg "workspace $WORK2; exec alacritty" #i3-sensible-terminal"
 exec --no-startup-id i3-msg "workspace $WORK4; exec pcmanfm"
