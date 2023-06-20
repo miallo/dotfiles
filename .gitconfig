@@ -9,17 +9,11 @@
 	ff = only
 
 [alias]
-	co = checkout
-	ci = commit
-	st = status
-	br = branch
 	psu = push -u origin HEAD
 	hist = log --graph --decorate --all --oneline
 	type = cat-file -t
 	dump = cat-file -p
 	gone = ! git fetch -p && git for-each-ref --format '%(refname:short) %(upstream:track)' | awk '$2 == \"[gone]\" {print $1}' | xargs -r git branch -D
-	or-diff = ! git range-diff $(git merge-base origin/integration HEAD)..HEAD $(git merge-base origin/integration origin/$(git branch --show-current))..origin/$(git branch --show-current)
-	pick-branch = ! git cherry-pick $(git merge-base HEAD "$1").."$1"
 	stsh = stash --keep-index
 	staash = stash --include-untracked
 	staaash = stash --all
