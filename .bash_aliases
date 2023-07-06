@@ -87,3 +87,9 @@ alias nix-update-mac="sudo -i sh -c 'nix-channel --update && nix-env -iA nixpkgs
 # Android emulator
 alias tbe='adb shell settings put secure enabled_accessibility_services com.google.android.marvin.talkback/com.google.android.marvin.talkback.TalkBackService'
 alias tbd='adb shell settings put secure enabled_accessibility_services com.android.talkback/com.google.android.marvin.talkback.TalkBackService'
+
+rebuild() {
+    beforeRebuildGeneration="$(nixos-rebuild list-generations --json | jq 'map(select(.current))[0].generation')"
+    sudo nixos-rebuild switch --update-input nixpkgs --update-input nixos-hardware --commit-lock-file
+    nix store diff-closures /run/current-system "/nix/var/nix/profiles/system-$beforeRebuildGeneration-link"
+}
