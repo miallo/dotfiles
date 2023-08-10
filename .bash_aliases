@@ -23,6 +23,7 @@ alias cds='cd ~/src/Salus/citizen-app/'
 alias cdp='cd ~/src/Salus/psap-app/'
 alias cdl='cd ~/src/Salus/sms-location-app'
 alias cdf='cd ~/src/Salus/functional-test-automation'
+alias cdo='cd ~/src/Salus/ops'
 alias cdw='cd ~/src/website'
 
 
