@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Authors:
 # - Moritz Warning <moritzwarning@web.de> (2016)
@@ -49,7 +49,8 @@ readable() {
 }
 
 update_rate() {
-  local time=$(date +%s)
+  local time
+  time=$(date +%s)
   local rx=0 tx=0 tmp_rx tmp_tx
 
   for iface in $ifaces; do
@@ -59,7 +60,7 @@ update_rate() {
     tx=$(( tx + tmp_tx ))
   done
 
-  local interval=$(( $time - $last_time ))
+  local interval=$(( time - last_time ))
   if [ $interval -gt 0 ]; then
     rate="$(readable $(( (rx - last_rx) / interval )))↓ $(readable $(( (tx - last_tx) / interval )))↑"
   else
