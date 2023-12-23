@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-# All zsh version of https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-prompt @ 1ac40cd
+# All zsh version of https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-prompt @ 47c04d9
 
 autoload -U colors && colors
 
@@ -18,6 +18,7 @@ autoload -U colors && colors
 : "${ZSH_THEME_GIT_PROMPT_AHEAD:="%{↑%G%}"}"
 : "${ZSH_THEME_GIT_PROMPT_UNTRACKED:="%{…%G%}"}"
 : "${ZSH_THEME_GIT_PROMPT_CLEAN:="%{$fg_bold[green]%}%{✔%G%}"}"
+: "${ZSH_THEME_GIT_PROMPT_STASHES="%{$fg_bold[blue]%}%{⚑%G%}"}"
 
 get_tagname_or_hash() {
     # get tagname
@@ -115,6 +116,7 @@ parse_git() {
                 ((GIT_STAGED++))
                 ;;
         esac
+        GIT_STASHES="$(git rev-list --walk-reflogs --count refs/stash -- 2> /dev/null)"
     done
 }
 
@@ -149,6 +151,9 @@ git_super_status() {
     fi
     if [ "$GIT_UNTRACKED" -ne "0" ]; then
         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_UNTRACKED$GIT_UNTRACKED%{${reset_color}%}"
+    fi
+    if [ "$GIT_STASHES" -ne "0" ]; then
+        STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_STASHES$GIT_STASHES%{${reset_color}%}"
     fi
     if [ "$GIT_ADDED" -eq "0" ] && [ "$GIT_MODIFIED" -eq "0" ] && [ "$GIT_CONFLICTS" -eq "0" ] && [ "$GIT_DELETED" -eq "0" ] && [ "$GIT_RENAMED_OR_COPIED" -eq "0" ] && [ "$GIT_STAGED" -eq "0" ]; then
         STATUS="$STATUS$ZSH_THEME_GIT_PROMPT_CLEAN"
