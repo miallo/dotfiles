@@ -9,3 +9,7 @@ function sleep-in-minutes() {
   local seconds=$(($1*60))
   sleep ${seconds}; osascript -e 'tell application "System Events" to sleep'
 }
+
+if [ -e "$HOME/.cargo/env" ]; then
+    . "$HOME/.cargo/env"
+fi
