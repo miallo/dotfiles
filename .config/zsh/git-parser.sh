@@ -26,9 +26,9 @@ get_tagname_or_hash() {
 
     if [ ${#tags[@]} -gt 0 ]; then
         if [ ${#tags[@]} -gt 1 ]; then
-            echo "${tags[0]}+"
+            echo "${tags:0} 🏷️ +"
         else
-            echo "${tags[0]}"
+            echo "${tags:0} 🏷️ "
         fi
     else
         # get hash
