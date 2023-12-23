@@ -56,10 +56,10 @@ parse_git() {
                 st2="${line:2}"
                 branchrest=("${(s/.../)st2}")
                 case $st2 in
-                    *'Initial commit on'*|*'No commits yet on'*)
+                    ' No commits yet on'*)
                         GIT_BRANCH="${st2##* }"
                         ;;
-                    *'no branch'*):  # detached status
+                    ' HEAD (no branch)'):  # detached status
                         GIT_BRANCH="$(get_tagname_or_hash)"
                         ;;
                     *)
