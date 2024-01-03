@@ -8,9 +8,10 @@ if ! [ $? -eq 0 ]; then
     # not a git repo
     exit
 fi
-: "${ZSH_THEME_GIT_PROMPT_TRUSTED_WORKSPACE:="${XDG_CONFIG_HOME-"$HOME/.config"}/zsh/git-trusted-workspaces"}"
+: "${ZSH_THEME_GIT_PROMPT_IGNORED_WORKSPACE:="${XDG_CONFIG_HOME-"$HOME/.config"}/zsh/git-ignored-workspaces"}"
 # mkdir -p "$(dirname "$ZSH_THEME_GIT_PROMPT_IGNORED_WORKSPACE")"
 grep -q "^$workingtree_path\$" "$ZSH_THEME_GIT_PROMPT_IGNORED_WORKSPACE" 2>/dev/null && exit
+: "${ZSH_THEME_GIT_PROMPT_TRUSTED_WORKSPACE:="${XDG_CONFIG_HOME-"$HOME/.config"}/zsh/git-trusted-workspaces"}"
 # mkdir -p "$(dirname "$ZSH_THEME_GIT_PROMPT_TRUSTED_WORKSPACE")"
 if ! grep -q "^$workingtree_path\$" "$ZSH_THEME_GIT_PROMPT_TRUSTED_WORKSPACE" 2>/dev/null; then
     echo -n "%{$fg_bold[red]%}untrusted repo!${reset_color} %{$fg_bold[green]%}git-deny${reset_color} or %{$fg[red]%}git-trust${reset_color}"
