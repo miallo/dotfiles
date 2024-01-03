@@ -96,8 +96,16 @@ rebuild() {
 }
 
 git-trust() {
+    if [ "$1" = "-e" ]; then
+        "$EDITOR" "$ZSH_THEME_GIT_PROMPT_TRUSTED_WORKSPACE"
+        return
+    fi
     git rev-parse --show-toplevel >> "$ZSH_THEME_GIT_PROMPT_TRUSTED_WORKSPACE"
 }
 git-deny() {
+    if [ "$1" = "-e" ]; then
+        "$EDITOR" "$ZSH_THEME_GIT_PROMPT_IGNORED_WORKSPACE"
+        return
+    fi
     git rev-parse --show-toplevel >> "$ZSH_THEME_GIT_PROMPT_IGNORED_WORKSPACE"
 }
