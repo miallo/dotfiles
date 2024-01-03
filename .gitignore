@@ -1,5 +1,6 @@
 .config/i3/config
 .config/i3/colors
+.config/zsh/git-*-workspaces
 .vim/.base16
 .vim/.base16.previous
 .vim/bundle

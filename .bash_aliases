@@ -94,3 +94,10 @@ rebuild() {
     sudo nixos-rebuild switch --update-input nixpkgs --update-input nixos-hardware --commit-lock-file
     nix store diff-closures /run/current-system "/nix/var/nix/profiles/system-$beforeRebuildGeneration-link"
 }
+
+git-trust() {
+    git rev-parse --show-toplevel >> "$ZSH_THEME_GIT_PROMPT_TRUSTED_WORKSPACE"
+}
+git-deny() {
+    git rev-parse --show-toplevel >> "$ZSH_THEME_GIT_PROMPT_IGNORED_WORKSPACE"
+}

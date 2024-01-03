@@ -1,5 +1,6 @@
 ZSH_DISABLE_COMPFIX=true
-
+export ZSH_THEME_GIT_PROMPT_TRUSTED_WORKSPACE="$HOME/.config/zsh/git-trusted-workspaces"
+export ZSH_THEME_GIT_PROMPT_IGNORED_WORKSPACE="$HOME/.config/zsh/git-ignored-workspaces"
 source ~/.config/zsh/history.sh
 source ~/.config/zsh/bindkeys.sh
 source ~/.config/zsh/completion.sh

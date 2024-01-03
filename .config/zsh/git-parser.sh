@@ -1,8 +1,21 @@
 #!/usr/bin/env zsh
 
 # All zsh version of https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-prompt @ 47c04d9
-
 autoload -U colors && colors
+
+workingtree_path="$(git rev-parse --show-toplevel 2>/dev/null)"
+if ! [ $? -eq 0 ]; then
+    # not a git repo
+    exit
+fi
+: "${ZSH_THEME_GIT_PROMPT_TRUSTED_WORKSPACE:="${XDG_CONFIG_HOME-"$HOME/.config"}/zsh/git-trusted-workspaces"}"
+# mkdir -p "$(dirname "$ZSH_THEME_GIT_PROMPT_IGNORED_WORKSPACE")"
+grep -q "^$workingtree_path\$" "$ZSH_THEME_GIT_PROMPT_IGNORED_WORKSPACE" 2>/dev/null && exit
+# mkdir -p "$(dirname "$ZSH_THEME_GIT_PROMPT_TRUSTED_WORKSPACE")"
+if ! grep -q "^$workingtree_path\$" "$ZSH_THEME_GIT_PROMPT_TRUSTED_WORKSPACE" 2>/dev/null; then
+    echo -n "%{$fg_bold[red]%}untrusted repo!${reset_color} %{$fg_bold[green]%}git-deny${reset_color} or %{$fg[red]%}git-trust${reset_color}"
+    exit
+fi
 
 : "${ZSH_THEME_GIT_PROMPT_PREFIX:="("}"
 : "${ZSH_THEME_GIT_PROMPT_SUFFIX:=")"}"
