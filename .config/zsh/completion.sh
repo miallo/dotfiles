@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+# from https://github.com/ohmyzsh/ohmyzsh/blob/b5583a321644218702c4ef588934575f46a2159b/lib/completion.zsh
 
 # fixme - the load process here seems a bit bizarre
 zmodload -i zsh/complist
@@ -20,9 +21,9 @@ if [[ "$CASE_SENSITIVE" = true ]]; then
   zstyle ':completion:*' matcher-list 'r:|=*' 'l:|=* r:|=*'
 else
   if [[ "$HYPHEN_INSENSITIVE" = true ]]; then
-    zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
+    zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]-_}={[:upper:][:lower:]_-}' 'r:|=*' 'l:|=* r:|=*'
   else
-    zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+    zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*'
   fi
 fi
 unset CASE_SENSITIVE HYPHEN_INSENSITIVE
