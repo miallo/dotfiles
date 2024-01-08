@@ -97,6 +97,8 @@ rebuild() {
 
 git-trust() {
     if [ "$1" = "-e" ]; then
+        sort < "$ZSH_THEME_GIT_PROMPT_TRUSTED_WORKSPACE" > "$ZSH_THEME_GIT_PROMPT_TRUSTED_WORKSPACE.bak"
+        mv "$ZSH_THEME_GIT_PROMPT_TRUSTED_WORKSPACE.bak" "$ZSH_THEME_GIT_PROMPT_TRUSTED_WORKSPACE"
         "$EDITOR" "$ZSH_THEME_GIT_PROMPT_TRUSTED_WORKSPACE"
         return
     fi
@@ -104,6 +106,8 @@ git-trust() {
 }
 git-deny() {
     if [ "$1" = "-e" ]; then
+        sort < "$ZSH_THEME_GIT_PROMPT_IGNORED_WORKSPACE" > "$ZSH_THEME_GIT_PROMPT_IGNORED_WORKSPACE.bak"
+        mv "$ZSH_THEME_GIT_PROMPT_IGNORED_WORKSPACE.bak" "$ZSH_THEME_GIT_PROMPT_IGNORED_WORKSPACE"
         "$EDITOR" "$ZSH_THEME_GIT_PROMPT_IGNORED_WORKSPACE"
         return
     fi
