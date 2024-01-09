@@ -26,6 +26,8 @@ export EDITOR='nvim'
 
 # Path in prompt shortened
 setopt prompt_subst
+# allow '#' as comment character
+setopt interactive_comments
 
 #PS1='%n $(shrink_path -f) $(git_super_status)> '
 PS1='$(shrink_path -f) $($HOME/.config/zsh/git-parser.sh)%(?..%F{red})%(!.#.>)%f '
