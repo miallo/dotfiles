@@ -19,6 +19,7 @@ alias python=python3
 # alias sshcip='ssh -Y  m.lohmann@login.cip.physik.uni-goettingen.de'
 alias finalcutextend='rm ~/Library/Application\ Support/.ffuserdata'
 which nvim > /dev/null && alias vim='nvim'
+alias cim='vim'
 alias cds='cd ~/src/Salus/citizen-app/'
 alias cdp='cd ~/src/Salus/psap-app/'
 alias cdl='cd ~/src/Salus/sms-location-app'
@@ -32,6 +33,7 @@ alias g='git'
 alias ga='git add'
 alias gc='git commit -v'
 alias gca='git commit -v -a'
+alias grhu='git reset --hard @{u}'
 alias gcp='git cherry-pick'
 alias gcpa='git cherry-pick --abort'
 alias gcpc='git cherry-pick --continue'
@@ -73,6 +75,9 @@ alias gstp='git stash pop'
 alias gsw='git switch'
 alias gswc='git switch -c'
 
+tigb() {
+    tig "$(git merge-base origin/main "$1")".."$1"
+}
 
 
 nix-git-sha() {
