@@ -31,3 +31,5 @@
 	directory = /etc/nixos
 [submodule]
 	recurse = true
+[commit]
+	verbose = true
