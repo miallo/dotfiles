@@ -24,7 +24,7 @@
 [init]
 	defaultBranch = main
 [advice]
-	skippedCherryPicks = false
+	skippedcherrypicks = false
 [remote "origin"]
 	prune = true
 [safe]
