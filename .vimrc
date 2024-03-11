@@ -18,7 +18,8 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'shougo/deoplete.nvim'
 " Plugin 'thoughtstream/Damian-Conway-s-Vim-Setup'
 Plugin 'neovim/nvim-lspconfig'      " configure lsp server for autocompletion, ...
-Plugin 'LnL7/vim-nix'               " nix syntax
+" Plugin 'LnL7/vim-nix'             " nix syntax
+Plugin 'oxalica/nil'                " nix lsp
 Plugin 'SirVer/ultisnips'
 Plugin 'Yggdroot/indentLine'        " show indentation levels
 Plugin 'airblade/vim-gitgutter'     " git marks in buffers
