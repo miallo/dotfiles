@@ -30,7 +30,10 @@ Plugin 'chriskempson/base16-vim'    " color maps
 Plugin 'darfink/vim-plist'          " (binary) plist support
 " Plugin 'dense-analysis/ale'         " linter and language server
 Plugin 'mhartington/formatter.nvim' " autoformatting
-Plugin 'hrsh7th/nvim-compe'         " autocompletion
+Plugin 'hrsh7th/nvim-cmp'           " autocompletion
+Plugin 'hrsh7th/cmp-nvim-lsp'
+Plugin 'hrsh7th/cmp-buffer'
+Plugin 'quangnguyen30192/cmp-nvim-ultisnips'
 Plugin 'editorconfig/editorconfig-vim'
 Plugin 'farmergreg/vim-lastplace'   " open last buffers
 Plugin 'junegunn/fzf.vim'           " fuzzy file finder
