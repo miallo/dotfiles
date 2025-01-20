@@ -11,8 +11,10 @@ alias sl='ls'
 alias anzeigen='defaults write com.apple.finder AppleShowAllFiles 1 && killall Finder'
 alias ausblenden='defaults write com.apple.finder AppleShowAllFiles 0 && killall Finder'
 
-alias up='nmcli connection up bevuta'
-alias down='nmcli connection down bevuta'
+alias upo='nmcli connection up bevuta'
+alias downo='nmcli connection down bevuta'
+alias up='nmcli connection up michael_new'
+alias down='nmcli connection down michael_new'
 
 alias python=python3
 
