@@ -302,8 +302,8 @@ exec --no-startup-id xsetroot -solid "#333333"
 
 # exec if xrandr | grep -q 'HDMI1 connected'; then xrandr --output HDMI1 --primary --auto --right-of DP2; else xrandr --output HDMI2 --primary --auto --right-of DP1; fi
 #exec --no-startup-id i3-msg "workspace $WORK4; exec nautilus"
-exec --no-startup-id i3-msg "workspace $WORK1; exec ungoogled-chromium;"
-#exec --no-startup-id i3-msg "workspace $WORK1; exec firefox;"
+exec --no-startup-id i3-msg "workspace $WORK5; exec ungoogled-chromium;"
+exec --no-startup-id i3-msg "workspace $WORK1; exec firefox;"
 # exec --no-startup-id i3-msg "workspace $WORK2; exec alacritty" #i3-sensible-terminal"
 exec --no-startup-id i3-msg "workspace $WORK4; exec pcmanfm"
 exec --no-startup-id i3-msg "workspace $WORK9; exec thunderbird"
