@@ -33,3 +33,7 @@
 	recurse = true
 [commit]
 	verbose = true
+[maintenance]
+	repo = /home/michael/src/Salus/citizen-app
+[log]
+	follow = true
