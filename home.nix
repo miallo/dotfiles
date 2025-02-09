@@ -43,8 +43,13 @@
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
     # ".screenrc".source = dotfiles/screenrc;
-    ".zshrc".source = ./zshrc;
-
+    ".zshrc".source = ./.zshrc;
+    ".vimrc".source = ./.vimrc;
+    # ".vim".source = ./.vim; <= can't be added, because it needs to be writable
+    ".gitconfig".source = ./.gitconfig;
+    ".bashrc".source = ./.bashrc;
+    ".bash_aliases".source = ./.bash_aliases;
+    # ".config/zsh".source = ./.config/zsh;
     # # You can also set the file content immediately.
     # ".gradle/gradle.properties".text = ''
     #   org.gradle.console=verbose
