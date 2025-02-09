@@ -1,5 +1,5 @@
 [user]
-	email = michael.lohmann@bevuta.com
+	email = mi.al.lohmann@gmail.com
 	name = Michael Lohmann
 	useConfigOnly = true
 [branch]
@@ -7,7 +7,12 @@
 [pull]
 	rebase = true
 	ff = only
-
+[sendemail]
+	smtpServer = smtp.gmail.com
+	smtpServerPort = 587
+	smtpEncryption = tls
+	smtpUser = mi.al.lohmann@gmail.com
+	confirm = always
 [alias]
 	psu = push -u origin HEAD
 	hist = log --graph --decorate --all --oneline
@@ -33,7 +38,15 @@
 	recurse = true
 [commit]
 	verbose = true
-[maintenance]
-	repo = /home/michael/src/Salus/citizen-app
 [log]
 	follow = true
+[core]
+	excludesfile = /Users/michael/.gitignore_global
+[credential]
+	helper = osxkeychain
+[format]
+	signOff = true
+[stash]
+	showPatch = true
+[rebase]
+	updateRefs = true
