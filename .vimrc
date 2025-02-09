@@ -56,6 +56,7 @@ Plugin 'nvim-lua/popup.nvim'
 Plugin 'nvim-lua/plenary.nvim'
 Plugin 'nvim-telescope/telescope.nvim'
 Plugin 'wincent/terminus'           " terminal setup
+Plugin 'nomnivore/ollama.nvim'      " LLM integration
 
 call vundle#end()
 
