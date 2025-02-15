@@ -49,6 +49,11 @@ zstyle ':completion:*:*:nvim:*' file-patterns '^*(.(o|png|aux|log|pdf|bbl|blg|ou
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
   . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
 fi
+
+# Home Manager
+if [ -e "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh" ]; then
+  . "$HOME/.nix-profile/etc/profile.d/hm-session-vars.sh"
+fi
 # End Nix
 
 command -v direnv >& /dev/null && eval "$(direnv hook zsh)"
