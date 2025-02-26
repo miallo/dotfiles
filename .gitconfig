@@ -4,6 +4,7 @@
 	useConfigOnly = true
 [branch]
 	autosetuprebase = always
+	sort = -committerdate
 [pull]
 	rebase = true
 	ff = only
@@ -26,6 +27,7 @@
 	private = config user.email mi.al.lohmann@gmail.com
 [rerere]
 	enabled = true
+	autoupdate = true
 [init]
 	defaultBranch = main
 [advice]
@@ -49,4 +51,23 @@
 [stash]
 	showPatch = true
 [rebase]
+	autoSquash = true
+	autoStash = true
 	updateRefs = true
+[column]
+	ui = auto
+[tag]
+	sort = version:refname
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[push]
+	default = simple
+	autoSetupRemote = true
+	followTags = true
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
