@@ -28,6 +28,7 @@ alias cdp='cd ~/src/Salus/psap-app/'
 alias cdl='cd ~/src/Salus/sms-location-app'
 alias cdo='cd ~/src/Salus/ops'
 alias cdw='cd ~/src/website'
+alias cdm='cd ~/src/semantic_search/frontend'
 
 
 # git
