@@ -1,3 +1,7 @@
+# Archive Note
+
+Moved to https://git.lohmann.sh/michael/dotfiles
+
 # dotfiles
 My Dotfiles (`nixos`, `vim`, `i3`, `bash`, `zsh`, ...)
 
